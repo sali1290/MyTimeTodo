@@ -1,15 +1,24 @@
 package com.example.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+
+@Entity(tableName = "work_table")
 data class WorkModel(
 
+    @ColumnInfo(name = "work_id")
     val id: Int,
 
+    @ColumnInfo(name = "work_title")
     val title: String,
 
+    @ColumnInfo(name = "work_time")
     val time: String,
 
+    @ColumnInfo(name = "work_body")
     val body: String,
 
+    @ColumnInfo(name = "work_color")
     val color: String
 
 )

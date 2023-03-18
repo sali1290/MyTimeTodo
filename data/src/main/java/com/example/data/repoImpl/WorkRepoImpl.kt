@@ -3,7 +3,7 @@ package com.example.data.repoImpl
 import com.example.domain.model.Work
 import com.example.domain.repo.WorkRepo
 
-class WorkRepoImpl: WorkRepo {
+class WorkRepoImpl : WorkRepo {
     override suspend fun getAllWorks(): List<Work> {
         TODO("Not yet implemented")
     }
@@ -12,7 +12,12 @@ class WorkRepoImpl: WorkRepo {
         TODO("Not yet implemented")
     }
 
-    override suspend fun addWork() {
+    override suspend fun addWork(work: Work) {
         TODO("Not yet implemented")
     }
+
+    override suspend fun updateWork(work: Work) {
+        TODO("Not yet implemented")
+    }
+
 }

@@ -10,5 +10,6 @@ interface WorkRepo {
 
     suspend fun addWork(work: Work)
 
+    suspend fun updateWork(work: Work)
 
 }

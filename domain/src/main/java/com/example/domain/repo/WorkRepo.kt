@@ -8,7 +8,7 @@ interface WorkRepo {
 
     suspend fun deleteWork(id: Int)
 
-    suspend fun addWork()
+    suspend fun addWork(work: Work)
 
 
 }

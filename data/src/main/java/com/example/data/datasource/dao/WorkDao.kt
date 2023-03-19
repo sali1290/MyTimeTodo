@@ -6,16 +6,16 @@ import com.example.data.model.WorkModel
 @Dao
 interface WorkDao {
 
-    @Insert
-    fun addWork(workModel: WorkModel)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addWork(workModel: WorkModel): Int
 
     @Query("SELECT * FROM work_table")
     fun getAllWorks(): List<WorkModel>
 
-    @Update
-    fun updateWork(workModel: WorkModel)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateWork(workModel: WorkModel): Int
 
     @Delete
-    fun deleteWork(workModel: WorkModel)
+    fun deleteWork(workModel: WorkModel): Int
 
 }

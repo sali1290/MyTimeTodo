@@ -1,7 +1,6 @@
 package com.example.data.repoImpl
 
 import com.example.data.datasource.dao.WorkDao
-import com.example.data.datasource.db.WorkDb
 import com.example.data.mapper.WorkMapper
 import com.example.data.model.WorkModel
 import com.example.domain.model.Work
@@ -24,16 +23,28 @@ class WorkRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteWork(work: Work) {
-        TODO("Not yet implemented")
+    override suspend fun deleteWork(work: Work): Boolean {
+        if (dbDao.deleteWork(mapper.toWorkModel(work)) != 0) {
+            return true
+        } else {
+            throw IOException("Something went wrong!")
+        }
     }
 
-    override suspend fun addWork(work: Work) {
-        TODO("Not yet implemented")
+    override suspend fun addWork(work: Work): Boolean {
+        if (dbDao.deleteWork(mapper.toWorkModel(work)) != -1) {
+            return true
+        } else {
+            throw IOException("Something went wrong!")
+        }
     }
 
-    override suspend fun updateWork(work: Work) {
-        TODO("Not yet implemented")
+    override suspend fun updateWork(work: Work): Boolean {
+        if (dbDao.deleteWork(mapper.toWorkModel(work)) != 0) {
+            return true
+        } else {
+            throw IOException("Something went wrong!")
+        }
     }
 
 }

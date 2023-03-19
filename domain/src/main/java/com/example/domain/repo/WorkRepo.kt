@@ -6,7 +6,7 @@ interface WorkRepo {
 
     suspend fun getAllWorks(): List<Work>
 
-    suspend fun deleteWork(id: Int)
+    suspend fun deleteWork(work: Work)
 
     suspend fun addWork(work: Work)
 

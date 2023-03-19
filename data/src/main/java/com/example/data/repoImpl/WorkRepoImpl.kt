@@ -24,7 +24,7 @@ class WorkRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteWork(id: Int) {
+    override suspend fun deleteWork(work: Work) {
         TODO("Not yet implemented")
     }
 

@@ -8,6 +8,6 @@ import com.example.data.model.WorkModel
 @Database(entities = [WorkModel::class], version = 1)
 abstract class WorkDb : RoomDatabase() {
 
-    abstract val workDao: WorkDao
+    abstract fun workDao(): WorkDao
 
 }

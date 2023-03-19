@@ -2,8 +2,9 @@ package com.example.data.mapper
 
 import com.example.data.model.WorkModel
 import com.example.domain.model.Work
+import javax.inject.Inject
 
-class WorkMapper {
+class WorkMapper @Inject constructor() {
 
     fun toWork(workModel: WorkModel): Work {
         return Work(

@@ -16,6 +16,6 @@ interface WorkDao {
     fun updateWork(workModel: WorkModel)
 
     @Delete
-    fun deleteWork(workId: Int)
+    fun deleteWork(workModel: WorkModel)
 
 }

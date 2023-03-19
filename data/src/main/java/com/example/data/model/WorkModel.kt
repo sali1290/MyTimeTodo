@@ -2,11 +2,13 @@ package com.example.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "work_table")
 data class WorkModel(
 
     @ColumnInfo(name = "work_id")
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
 
     @ColumnInfo(name = "work_title")

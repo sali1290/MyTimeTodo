@@ -16,16 +16,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DbModule {
 
-    @Provides
     @Singleton
-    fun provideDb(@ApplicationContext context: Context): RoomDatabase {
-        return Room.databaseBuilder(context, WorkDb::class.java, "work_db").build()
-    }
+    @Provides
+    fun provideDb(@ApplicationContext context: Context) =
+        Room.databaseBuilder(context, WorkDb::class.java, "work_db").build()
+
 
     @Provides
     @Singleton
     fun provideWorkDaoO(db: WorkDb): WorkDao {
-        return db.workDao
+        return db.workDao()
     }
 
 }

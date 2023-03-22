@@ -24,27 +24,15 @@ class WorkRepoImpl @Inject constructor(
     }
 
     override suspend fun deleteWork(work: Work): Boolean {
-        if (dbDao.deleteWork(mapper.toWorkModel(work)) != 0) {
-            return true
-        } else {
-            throw IOException("Something went wrong!")
-        }
+        return dbDao.deleteWork(mapper.toWorkModel(work)) != 0
     }
 
     override suspend fun addWork(work: Work): Boolean {
-        if (dbDao.deleteWork(mapper.toWorkModel(work)) != -1) {
-            return true
-        } else {
-            throw IOException("Something went wrong!")
-        }
+        return dbDao.addWork(mapper.toWorkModel(work)) != -1L
     }
 
     override suspend fun updateWork(work: Work): Boolean {
-        if (dbDao.deleteWork(mapper.toWorkModel(work)) != 0) {
-            return true
-        } else {
-            throw IOException("Something went wrong!")
-        }
+        return dbDao.updateWork(mapper.toWorkModel(work)) != 0
     }
 
 }

@@ -7,7 +7,7 @@ import com.example.data.model.WorkModel
 interface WorkDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addWork(workModel: WorkModel): Int
+    fun addWork(workModel: WorkModel): Long
 
     @Query("SELECT * FROM work_table")
     fun getAllWorks(): List<WorkModel>

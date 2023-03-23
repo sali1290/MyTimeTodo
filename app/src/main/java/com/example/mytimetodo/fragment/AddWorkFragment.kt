@@ -1,4 +1,4 @@
-package com.example.mytimetodo
+package com.example.mytimetodo.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.mytimetodo.databinding.FragmentHomeBinding
+import com.example.mytimetodo.databinding.FragmentDailyRoutineBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.viewmodel.HomeViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class HomeFragment : Fragment() {
+class DailyRoutineFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentDailyRoutineBinding? = null
+    private val binding: FragmentDailyRoutineBinding
+        get() = _binding!!
+
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
@@ -23,16 +24,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentDailyRoutineBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        viewModel.getAllWorks()
-//        observe()
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun observe() {
@@ -54,4 +52,5 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 }

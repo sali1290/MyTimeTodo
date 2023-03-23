@@ -24,18 +24,43 @@ class HomeViewModel @Inject constructor(
     private val updateWork: UpdateWork,
 ) : ViewModel() {
 
-    private val _works = MutableLiveData<Result<List<Work>>>()
-    val works: LiveData<Result<List<Work>>>
-        get() = _works
+    private val _dailyWorks = MutableLiveData<Result<List<Work>>>()
+    val dailyWorks: LiveData<Result<List<Work>>>
+        get() = _dailyWorks
 
-    fun getAllWorks() = viewModelScope.launch(Dispatchers.IO) {
-        _works.postValue(Result.Loading)
+    fun getDailyRoutineWorks() = viewModelScope.launch(Dispatchers.IO) {
+        _dailyWorks.postValue(Result.Loading)
         try {
-            _works.postValue(
-                Result.Success(getAllWorks.invoke())
+            val workList = getAllWorks.invoke().filter {
+                it.time != null
+            }
+            _dailyWorks.postValue(
+                Result.Success(workList)
             )
         } catch (e: IOException) {
-            _works.postValue(
+            _dailyWorks.postValue(
+                Result.Error(
+                    e.message ?: "Something went wrong! please try again later."
+                )
+            )
+        }
+    }
+
+    private val _otherWorks = MutableLiveData<Result<List<Work>>>()
+    val otherWorks: LiveData<Result<List<Work>>>
+        get() = _otherWorks
+
+    fun getOtherWorks() = viewModelScope.launch(Dispatchers.IO) {
+        _otherWorks.postValue(Result.Loading)
+        try {
+            val workList = getAllWorks.invoke().filter {
+                it.time == null
+            }
+            _otherWorks.postValue(
+                Result.Success(workList)
+            )
+        } catch (e: IOException) {
+            _otherWorks.postValue(
                 Result.Error(
                     e.message ?: "Something went wrong! please try again later."
                 )

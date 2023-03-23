@@ -34,7 +34,7 @@ class DailyRoutineFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.works.observe(viewLifecycleOwner) {
+        viewModel.dailyWorks.observe(viewLifecycleOwner) {
             when (it) {
 
                 is Result.Success -> {

@@ -3,6 +3,7 @@ package com.example.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity(tableName = "work_table")
 data class WorkModel(
@@ -15,7 +16,7 @@ data class WorkModel(
     val title: String,
 
     @ColumnInfo(name = "work_time")
-    val time: String,
+    val time: Date?,
 
     @ColumnInfo(name = "work_body")
     val body: String,

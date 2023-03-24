@@ -2,6 +2,7 @@ package com.example.mytimetodo.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mytimetodo.R
 import com.example.mytimetodo.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +16,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.bottomNavigationView.background = null
+        binding.bottomNavigationView.apply {
+            background = null
+            selectedItemId = R.id.menu_item_daily_work
+        }
     }
 
 }

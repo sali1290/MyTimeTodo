@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.mytimetodo.adapter.DailyRoutineAdapter
 import com.example.mytimetodo.databinding.FragmentDailyRoutineBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.viewmodel.HomeViewModel
@@ -28,6 +29,13 @@ class DailyRoutineFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getDailyRoutineWorks()
+        observe()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -38,15 +46,27 @@ class DailyRoutineFragment : Fragment() {
             when (it) {
 
                 is Result.Success -> {
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
+                    if (it.data.isEmpty()) {
+                        binding.apply {
+                            recyclerDailyRoutine.visibility = View.GONE
+                            tvEmpty.visibility = View.VISIBLE
+                        }
+                    } else {
+                        val adapter = DailyRoutineAdapter(it.data)
+                        binding.recyclerDailyRoutine.adapter = adapter
+                    }
                 }
 
                 is Result.Loading -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_LONG).show()
+
                 }
 
                 is Result.Error -> {
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                    binding.apply {
+                        recyclerDailyRoutine.visibility = View.GONE
+                        tvEmpty.visibility = View.VISIBLE
+                    }
                 }
 
             }

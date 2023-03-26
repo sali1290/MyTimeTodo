@@ -1,7 +1,10 @@
 package com.example.mytimetodo.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.mytimetodo.R
 import com.example.mytimetodo.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +22,16 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.apply {
             background = null
             selectedItemId = R.id.menu_item_daily_work
+        }
+
+        binding.apply {
+            fab.setOnClickListener {
+                bottomAppBar.visibility = View.GONE
+                fab.visibility = View.GONE
+                val navHostFragment =
+                    navHostFragment.getFragment<NavHostFragment>()
+                navHostFragment.navController.navigate(R.id.addWorkFragment)
+            }
         }
     }
 

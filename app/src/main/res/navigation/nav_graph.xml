@@ -8,5 +8,14 @@
         android:id="@+id/dailyRoutineFragment"
         android:name="com.example.mytimetodo.fragment.DailyRoutineFragment"
         android:label="fragment_daily_routine"
-        tools:layout="@layout/fragment_daily_routine" />
+        tools:layout="@layout/fragment_daily_routine" >
+        <action
+            android:id="@+id/action_dailyRoutineFragment_to_addWorkFragment"
+            app:destination="@id/addWorkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addWorkFragment"
+        android:name="com.example.mytimetodo.fragment.AddWorkFragment"
+        android:label="fragment_add_work"
+        tools:layout="@layout/fragment_add_work" />
 </navigation>

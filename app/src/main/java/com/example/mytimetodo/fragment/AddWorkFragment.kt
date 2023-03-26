@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.AddWorkColorsAdapter
@@ -36,6 +37,7 @@ class AddWorkFragment : Fragment() {
         binding.recyclerAddWorkColor.adapter = adapter
 
         setUpOnClickListeners()
+        onBackPressed()
     }
 
     private fun setUpOnClickListeners() {
@@ -48,6 +50,28 @@ class AddWorkFragment : Fragment() {
                 onBackPressedDispatcher.onBackPressed()
             }
         }
+    }
+
+    private fun onBackPressed() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Do custom work here
+                    requireActivity().apply {
+                        findViewById<FloatingActionButton>(R.id.fab).visibility =
+                            View.VISIBLE
+                        findViewById<BottomAppBar>(R.id.bottom_app_bar).visibility =
+                            View.VISIBLE
+                    }
+                    // if you want onBackPressed() to be called as normal afterwards
+                    if (isEnabled) {
+                        isEnabled = false
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                    }
+                }
+            }
+            )
     }
 
 

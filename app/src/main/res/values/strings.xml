@@ -9,4 +9,7 @@
     <string name="cancel">Cancel</string>
     <string name="today_work">Today\'s work</string>
     <string name="empty">Empty!</string>
+    <string name="body">body</string>
+    <string name="time">time</string>
+    <string name="title">title</string>
 </resources>

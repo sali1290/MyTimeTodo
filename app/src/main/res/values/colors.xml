@@ -9,4 +9,12 @@
     <color name="primary_text">#FF212121</color>
     <color name="secondary_text">#FF757575</color>
     <color name="divider_color">#FFBDBDBD</color>
+
+    <!--  work items background colors  -->
+    <color name="item1">#FFE64A19</color>
+    <color name="item2">#FFFFCCBC</color>
+    <color name="item3">#FFFFC107</color>
+    <color name="item4">#FF388E3C</color>
+    <color name="item5">#FF607D8B</color>
+    <color name="item6">#FF0097A7</color>
 </resources>

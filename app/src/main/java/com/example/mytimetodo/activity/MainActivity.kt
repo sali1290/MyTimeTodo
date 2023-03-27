@@ -3,7 +3,6 @@ package com.example.mytimetodo.activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.mytimetodo.R
 import com.example.mytimetodo.databinding.ActivityMainBinding
@@ -33,6 +32,32 @@ class MainActivity : AppCompatActivity() {
                 navHostFragment.navController.navigate(R.id.addWorkFragment)
             }
         }
+
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when (it.itemId) {
+
+                R.id.menu_item_other_work -> {
+                    val navHostFragment =
+                        binding.navHostFragment.getFragment<NavHostFragment>()
+                    navHostFragment.navController.navigate(R.id.otherWorksFragment)
+                    return@setOnItemSelectedListener true
+                }
+
+                R.id.menu_item_daily_work -> {
+                    val navHostFragment =
+                        binding.navHostFragment.getFragment<NavHostFragment>()
+                    navHostFragment.navController.navigate(R.id.dailyRoutineFragment)
+                    return@setOnItemSelectedListener true
+                }
+
+                else -> {
+                    return@setOnItemSelectedListener true
+                }
+
+            }
+        }
+
+
     }
 
 }

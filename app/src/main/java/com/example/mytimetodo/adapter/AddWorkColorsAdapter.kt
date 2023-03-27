@@ -29,8 +29,22 @@ class AddWorkColorsAdapter(private val context: Context, private val colorList: 
                 colorList[position]
             )
         )
+        viewHolder.colorItem.setOnClickListener {
+            if (onClickListener != null) {
+                onClickListener!!.onClick(position, colorList[position])
+            }
+        }
     }
 
     override fun getItemCount() = colorList.size
+
+    private var onClickListener: OnClickListener? = null
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
+
+    interface OnClickListener {
+        fun onClick(position: Int, colorId: Int)
+    }
 
 }

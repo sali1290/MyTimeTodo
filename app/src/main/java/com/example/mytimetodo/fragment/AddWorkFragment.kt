@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.AddWorkColorsAdapter
@@ -36,6 +37,17 @@ class AddWorkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = AddWorkColorsAdapter(requireContext(), WorkColorList.colorList)
+        adapter.setOnClickListener(object :
+            AddWorkColorsAdapter.OnClickListener {
+            override fun onClick(position: Int, colorId: Int) {
+                binding.etWorkBody.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        colorId
+                    )
+                )
+            }
+        })
         binding.recyclerAddWorkColor.adapter = adapter
 
         setUpOnClickListeners()

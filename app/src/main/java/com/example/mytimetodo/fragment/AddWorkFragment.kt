@@ -12,7 +12,9 @@ import com.example.mytimetodo.adapter.WorkColorList
 import com.example.mytimetodo.databinding.FragmentAddWorkBinding
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddWorkFragment : Fragment() {
 
     private var _binding: FragmentAddWorkBinding? = null

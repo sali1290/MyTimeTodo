@@ -11,7 +11,9 @@ import com.example.mytimetodo.adapter.DailyRoutineAdapter
 import com.example.mytimetodo.databinding.FragmentDailyRoutineBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.viewmodel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DailyRoutineFragment : Fragment() {
 
     private var _binding: FragmentDailyRoutineBinding? = null

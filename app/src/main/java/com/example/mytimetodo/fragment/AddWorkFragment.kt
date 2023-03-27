@@ -36,6 +36,13 @@ class AddWorkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        setUpAddColorRecycler()
+        setUpOnClickListeners()
+        onBackPressed()
+    }
+
+    private fun setUpAddColorRecycler() {
         adapter = AddWorkColorsAdapter(requireContext(), WorkColorList.colorList)
         adapter.setOnClickListener(object :
             AddWorkColorsAdapter.OnClickListener {
@@ -49,9 +56,6 @@ class AddWorkFragment : Fragment() {
             }
         })
         binding.recyclerAddWorkColor.adapter = adapter
-
-        setUpOnClickListeners()
-        onBackPressed()
     }
 
     private fun setUpOnClickListeners() {

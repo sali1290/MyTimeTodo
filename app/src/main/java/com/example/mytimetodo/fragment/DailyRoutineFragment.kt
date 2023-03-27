@@ -1,10 +1,11 @@
 package com.example.mytimetodo.fragment
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,6 +13,7 @@ import com.example.mytimetodo.adapter.DailyRoutineAdapter
 import com.example.mytimetodo.databinding.FragmentDailyRoutineBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.viewmodel.HomeViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -75,7 +77,20 @@ class DailyRoutineFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                    val snackBar = Snackbar.make(
+                        requireContext(),
+                        binding.tvEmpty,
+                        it.message,
+                        Snackbar.LENGTH_SHORT
+                    )
+                    (snackBar.view.layoutParams as (FrameLayout.LayoutParams)).gravity =
+                        Gravity.TOP
+                    snackBar.setAction("Ok") {
+                        snackBar.dismiss()
+                    }
+                    snackBar.show()
+
+
                     binding.apply {
                         recyclerDailyRoutine.visibility = View.GONE
                         tvEmpty.visibility = View.VISIBLE

@@ -18,7 +18,6 @@ class WorkRepoImpl @Inject constructor(
         return if (workList.isNotEmpty()) {
             workList.map(mapper::toWork)
         } else {
-            delay(5000)
             throw IOException("No work is saved!")
         }
     }

@@ -178,8 +178,13 @@ class AddWorkFragment : Fragment() {
             snackBar.dismiss()
         }
         snackBar.show()
+        requireActivity().apply {
+            findViewById<FloatingActionButton>(R.id.fab).visibility =
+                View.VISIBLE
+            findViewById<BottomAppBar>(R.id.bottom_app_bar).visibility =
+                View.VISIBLE
+        }
         findNavController().navigate(R.id.dailyRoutineFragment)
-        requireActivity().supportFragmentManager.popBackStack()
     }
 
 

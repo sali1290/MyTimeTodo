@@ -28,7 +28,7 @@ class DailyRoutineAdapter(private val data: List<Work>) :
 
     override fun onBindViewHolder(viewHolder: DailyRoutineViewHolder, position: Int) {
         viewHolder.apply {
-            workItem.setBackgroundColor(
+            workItem.setCardBackgroundColor(
                 data[position].color.toInt()
             )
             title.text = data[position].title

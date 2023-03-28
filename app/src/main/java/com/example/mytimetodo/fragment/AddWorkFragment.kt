@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -119,7 +118,7 @@ class AddWorkFragment : Fragment() {
                                 title = title,
                                 body = body,
                                 time = date,
-                                color = (binding.etWorkBody.background as (ColorDrawable)).toString()
+                                color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
                             )
                         )
                         //navigate to daily routine fragment and pop this fragment
@@ -131,7 +130,7 @@ class AddWorkFragment : Fragment() {
                                 title = title,
                                 body = body,
                                 time = null,
-                                color = (binding.etWorkBody.background as (ColorDrawable)).toString()
+                                color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
                             )
                         )
                         //navigate to daily routine fragment and pop this fragment

@@ -33,7 +33,11 @@ class DailyRoutineAdapter(private val data: List<Work>) :
             )
             title.text = data[position].title
             body.text = data[position].body
-            time.text = data[position].time.toString()
+            if (data[position].time == null) {
+                time.text = ""
+            } else {
+                time.text = data[position].time.toString()
+            }
         }
     }
 

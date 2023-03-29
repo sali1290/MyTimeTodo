@@ -1,6 +1,6 @@
 package com.example.mytimetodo.utility
 
-import java.util.*
+import java.util.Calendar
 
 fun getCurrentTime(): Pair<Int, Int> {
     val calender = Calendar.getInstance()

@@ -53,12 +53,12 @@ class AddWorkFragment : Fragment() {
 
         currentTime = getCurrentTime()
 
-        setUpAddColorRecycler()
+        setUpColorRecycler()
         setUpOnClickListeners()
         onBackPressed()
     }
 
-    private fun setUpAddColorRecycler() {
+    private fun setUpColorRecycler() {
         adapter = AddWorkColorsAdapter(requireContext(), WorkColorList.colorList)
         adapter.setOnClickListener(object :
             AddWorkColorsAdapter.OnClickListener {
@@ -92,7 +92,7 @@ class AddWorkFragment : Fragment() {
             var date: Date? = null
 
 
-
+            //show TimePickerDialog
             if (isRoutine) {
                 TimePickerDialog(
                     requireActivity(),
@@ -102,7 +102,7 @@ class AddWorkFragment : Fragment() {
                     currentTime.first,
                     currentTime.second,
                     true
-                )
+                ).show()
             }
 
             if (title.isEmpty()) {
@@ -111,7 +111,9 @@ class AddWorkFragment : Fragment() {
                 if (body.isEmpty()) {
                     binding.etWorkBody.error = "Work body shouldn't be empty"
                 } else {
+                    //check if work is daily or other
                     if (isRoutine) {
+                        //daily works
                         viewModel.addWork(
                             Work(
                                 id = 0,
@@ -124,6 +126,7 @@ class AddWorkFragment : Fragment() {
                         //navigate to daily routine fragment and pop this fragment
                         successfulWorkSave()
                     } else {
+                        //other works
                         viewModel.addWork(
                             Work(
                                 id = 0,

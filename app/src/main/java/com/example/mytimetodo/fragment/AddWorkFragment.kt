@@ -92,18 +92,7 @@ class AddWorkFragment : Fragment() {
             var date: Date? = null
 
 
-            //show TimePickerDialog
-            if (isRoutine) {
-                TimePickerDialog(
-                    requireActivity(),
-                    { _, hourOfDay, minute ->
-                        date = Date(hourOfDay.toLong() + minute.toLong())
-                    },
-                    currentTime.first,
-                    currentTime.second,
-                    true
-                ).show()
-            }
+
 
             if (title.isEmpty()) {
                 binding.etWorkTitle.error = "Work Title shouldn't be empty"
@@ -114,17 +103,28 @@ class AddWorkFragment : Fragment() {
                     //check if work is daily or other
                     if (isRoutine) {
                         //daily works
-                        viewModel.addWork(
-                            Work(
-                                id = 0,
-                                title = title,
-                                body = body,
-                                time = date,
-                                color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
-                            )
-                        )
-                        //navigate to daily routine fragment and pop this fragment
-                        successfulWorkSave()
+                        //show TimePickerDialog
+                        TimePickerDialog(
+                            requireActivity(),
+                            { _, hourOfDay, minute ->
+                                date = Date(hourOfDay.toLong() + minute.toLong())
+
+                                viewModel.addWork(
+                                    Work(
+                                        id = 0,
+                                        title = title,
+                                        body = body,
+                                        time = date,
+                                        color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                                    )
+                                )
+                                //navigate to daily routine fragment and pop this fragment
+                                successfulWorkSave()
+                            },
+                            currentTime.first,
+                            currentTime.second,
+                            true
+                        ).show()
                     } else {
                         //other works
                         viewModel.addWork(

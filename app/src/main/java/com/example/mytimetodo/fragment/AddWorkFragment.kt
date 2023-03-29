@@ -24,6 +24,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -89,7 +90,8 @@ class AddWorkFragment : Fragment() {
             val title = binding.etWorkTitle.text.toString()
             val body = binding.etWorkBody.text.toString()
             val isRoutine = binding.chbDaily.isChecked
-            var date: Date? = null
+            val calendar = Calendar.getInstance()
+            var date: Date?
 
 
 
@@ -107,7 +109,15 @@ class AddWorkFragment : Fragment() {
                         TimePickerDialog(
                             requireActivity(),
                             { _, hourOfDay, minute ->
-                                date = Date(hourOfDay.toLong() + minute.toLong())
+                                calendar.set(
+                                    Calendar.YEAR,
+                                    Calendar.MONTH,
+                                    Calendar.DAY_OF_MONTH,
+                                    hourOfDay,
+                                    minute
+                                )
+                                date = calendar.time
+
 
                                 viewModel.addWork(
                                     Work(

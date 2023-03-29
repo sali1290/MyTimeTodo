@@ -8,6 +8,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
+import com.google.android.material.timepicker.TimeFormat
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class DailyRoutineAdapter(private val data: List<Work>) :
     RecyclerView.Adapter<DailyRoutineAdapter.DailyRoutineViewHolder>() {
@@ -36,7 +39,7 @@ class DailyRoutineAdapter(private val data: List<Work>) :
             if (data[position].time == null) {
                 time.text = ""
             } else {
-                time.text = data[position].time.toString()
+                time.text = SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
             }
         }
     }

@@ -99,10 +99,6 @@ class AddWorkFragment : Fragment() {
             val isRoutine = binding.chbDaily.isChecked
             val calendar = Calendar.getInstance()
             var date: Date?
-//            Toast.makeText(
-//                requireActivity(), getBackgroundColor(binding.etWorkBody),
-//                Toast.LENGTH_SHORT
-//            ).show()
 
 
             if (title.isEmpty()) {
@@ -119,9 +115,9 @@ class AddWorkFragment : Fragment() {
                             requireActivity(),
                             { _, hourOfDay, minute ->
                                 calendar.set(
-                                    Calendar.YEAR,
-                                    Calendar.MONTH,
-                                    Calendar.DAY_OF_MONTH,
+                                    calendar.get(Calendar.YEAR),
+                                    calendar.get(Calendar.MONTH),
+                                    calendar.get(Calendar.DAY_OF_MONTH),
                                     hourOfDay,
                                     minute
                                 )

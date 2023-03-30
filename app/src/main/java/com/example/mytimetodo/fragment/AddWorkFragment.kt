@@ -24,7 +24,6 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -60,6 +59,14 @@ class AddWorkFragment : Fragment() {
     }
 
     private fun setUpColorRecycler() {
+        //set first color of list to EditText
+        binding.etWorkBody.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                WorkColorList.colorList[0]
+            )
+        )
+
         adapter = AddWorkColorsAdapter(requireContext(), WorkColorList.colorList)
         adapter.setOnClickListener(object :
             AddWorkColorsAdapter.OnClickListener {
@@ -92,8 +99,10 @@ class AddWorkFragment : Fragment() {
             val isRoutine = binding.chbDaily.isChecked
             val calendar = Calendar.getInstance()
             var date: Date?
-
-
+//            Toast.makeText(
+//                requireActivity(), getBackgroundColor(binding.etWorkBody),
+//                Toast.LENGTH_SHORT
+//            ).show()
 
 
             if (title.isEmpty()) {

@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class AddWorkFragment : Fragment() {
+class AddEditWorkFragment : Fragment() {
 
     private var _binding: FragmentAddWorkBinding? = null
     private val binding: FragmentAddWorkBinding
@@ -68,17 +68,7 @@ class AddWorkFragment : Fragment() {
         )
 
         adapter = AddWorkColorsAdapter(requireContext(), WorkColorList.colorList)
-        adapter.setOnClickListener(object :
-            AddWorkColorsAdapter.OnClickListener {
-            override fun onClick(position: Int, colorId: Int) {
-                binding.etWorkBody.setBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        colorId
-                    )
-                )
-            }
-        })
+        setUpAdapterRecyclerOnClickListener(adapter)
         binding.recyclerAddWorkColor.adapter = adapter
     }
 
@@ -209,6 +199,20 @@ class AddWorkFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setUpAdapterRecyclerOnClickListener(adapter: AddWorkColorsAdapter) {
+        adapter.setOnClickListener(object :
+            AddWorkColorsAdapter.OnClickListener {
+            override fun onClick(position: Int, colorId: Int) {
+                binding.etWorkBody.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        colorId
+                    )
+                )
+            }
+        })
     }
 
 }

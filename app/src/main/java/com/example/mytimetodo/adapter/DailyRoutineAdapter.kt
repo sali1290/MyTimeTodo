@@ -8,7 +8,6 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
-import com.google.android.material.timepicker.TimeFormat
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
@@ -39,12 +38,26 @@ class DailyRoutineAdapter(private val data: List<Work>) :
             if (data[position].time == null) {
                 time.text = ""
             } else {
-                time.text = SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
+                time.text =
+                    SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
+            }
+
+            workItem.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener!!.onClick(position, data[position])
+                }
             }
         }
     }
 
     override fun getItemCount() = data.size
 
+    private var onClickListener: OnClickListener? = null
+    fun setOnClickListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
 
+    interface OnClickListener {
+        fun onClick(position: Int, work: Work)
+    }
 }

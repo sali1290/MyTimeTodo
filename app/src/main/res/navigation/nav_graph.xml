@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/addWorkFragment"
-        android:name="com.example.mytimetodo.fragment.AddWorkFragment"
+        android:name="com.example.mytimetodo.fragment.AddEditWorkFragment"
         android:label="fragment_add_work"
         tools:layout="@layout/fragment_add_work" />
     <fragment

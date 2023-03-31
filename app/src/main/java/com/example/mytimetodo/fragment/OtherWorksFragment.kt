@@ -9,10 +9,15 @@ import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.domain.model.Work
+import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.DailyRoutineAdapter
 import com.example.mytimetodo.databinding.FragmentOtherWorksBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.viewmodel.HomeViewModel
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -64,6 +69,7 @@ class OtherWorksFragment : Fragment() {
                     } else {
                         val adapter = DailyRoutineAdapter(it.data)
                         binding.recyclerOtherWorks.adapter = adapter
+                        setUpAdapterRecyclerOnClickListener(adapter)
                     }
                 }
 
@@ -101,5 +107,18 @@ class OtherWorksFragment : Fragment() {
         _binding = null
     }
 
+    private fun setUpAdapterRecyclerOnClickListener(adapter: DailyRoutineAdapter) {
+
+        val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
+        val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
+
+        adapter.setOnClickListener(object : DailyRoutineAdapter.OnClickListener {
+            override fun onClick(position: Int, work: Work) {
+                bottomAppBar.visibility = View.GONE
+                fab.visibility = View.GONE
+                findNavController().navigate(R.id.addWorkFragment)
+            }
+        })
+    }
 
 }

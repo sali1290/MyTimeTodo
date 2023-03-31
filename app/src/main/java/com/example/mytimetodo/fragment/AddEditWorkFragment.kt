@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
@@ -39,6 +40,7 @@ class AddEditWorkFragment : Fragment() {
 
     private lateinit var currentTime: Pair<Int, Int>
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,12 +52,28 @@ class AddEditWorkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        checkAddOrEdit()
         currentTime = getCurrentTime()
 
         setUpColorRecycler()
         setUpOnClickListeners()
         onBackPressed()
+    }
+
+    private fun checkAddOrEdit() {
+        setFragmentResultListener("requestKey") { _, bundle ->
+            //any type that can be put in a Bundle is supported
+            //maybe in future change this line to parcelable
+            val work = bundle.getSerializable("workKey") as Work
+            //do something with the result
+            binding.etWorkTitle.setText(work.title)
+            binding.etWorkBody.setText(work.body)
+            binding.etWorkBody.setBackgroundColor(
+                work.color.toInt()
+            )
+
+        }
+
     }
 
     private fun setUpColorRecycler() {

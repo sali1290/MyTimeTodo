@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
@@ -116,6 +118,7 @@ class DailyRoutineFragment : Fragment() {
 
         adapter.setOnClickListener(object : DailyRoutineAdapter.OnClickListener {
             override fun onClick(position: Int, work: Work) {
+                setFragmentResult("requestKey", bundleOf("workKey" to work))
                 bottomAppBar.visibility = View.GONE
                 fab.visibility = View.GONE
                 findNavController().navigate(R.id.addWorkFragment)

@@ -1,5 +1,6 @@
 package com.example.domain.model
 
+import java.io.Serializable
 import java.util.*
 
 data class Work(
@@ -14,4 +15,4 @@ data class Work(
 
     val color: String
 
-)
+): Serializable

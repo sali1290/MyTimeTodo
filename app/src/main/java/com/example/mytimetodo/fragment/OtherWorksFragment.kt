@@ -119,7 +119,7 @@ class OtherWorksFragment : Fragment() {
                 setFragmentResult("requestKey", bundleOf("workKey" to work))
                 bottomAppBar.visibility = View.GONE
                 fab.visibility = View.GONE
-                findNavController().navigate(R.id.addWorkFragment)
+                findNavController().navigate(R.id.editWorkFragment)
             }
         })
     }

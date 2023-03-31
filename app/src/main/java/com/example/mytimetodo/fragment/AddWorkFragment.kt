@@ -50,27 +50,10 @@ class AddWorkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkAddOrEdit()
 
         setUpColorRecycler()
         setUpOnClickListeners()
         onBackPressed()
-    }
-
-    private fun checkAddOrEdit() {
-        setFragmentResultListener("requestKey") { _, bundle ->
-            //any type that can be put in a Bundle is supported
-            //maybe in future change this line to parcelable
-            val work = bundle.getSerializable("workKey") as Work
-            //do something with the result
-            binding.etWorkTitle.setText(work.title)
-            binding.etWorkBody.setText(work.body)
-            binding.etWorkBody.setBackgroundColor(
-                work.color.toInt()
-            )
-
-        }
-
     }
 
     private fun setUpColorRecycler() {

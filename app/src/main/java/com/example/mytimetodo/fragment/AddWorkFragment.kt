@@ -16,8 +16,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
-import com.example.mytimetodo.adapter.AddWorkColorsAdapter
+import com.example.mytimetodo.adapter.WorkColorsAdapter
 import com.example.mytimetodo.adapter.WorkColorList
+import com.example.mytimetodo.adapter.changeBackgroundColor
 import com.example.mytimetodo.databinding.FragmentAddWorkBinding
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -35,7 +36,7 @@ class AddWorkFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
 
-    private lateinit var adapter: AddWorkColorsAdapter
+    private lateinit var adapter: WorkColorsAdapter
     private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -81,8 +82,8 @@ class AddWorkFragment : Fragment() {
             )
         )
 
-        adapter = AddWorkColorsAdapter(requireContext(), WorkColorList.colorList)
-        setUpAdapterRecyclerOnClickListener(adapter)
+        adapter = WorkColorsAdapter(requireContext(), WorkColorList.colorList)
+        adapter.changeBackgroundColor(requireActivity(), binding.etWorkBody)
         binding.recyclerAddWorkColor.adapter = adapter
     }
 
@@ -214,18 +215,5 @@ class AddWorkFragment : Fragment() {
         _binding = null
     }
 
-    private fun setUpAdapterRecyclerOnClickListener(adapter: AddWorkColorsAdapter) {
-        adapter.setOnClickListener(object :
-            AddWorkColorsAdapter.OnClickListener {
-            override fun onClick(position: Int, colorId: Int) {
-                binding.etWorkBody.setBackgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        colorId
-                    )
-                )
-            }
-        })
-    }
 
 }

@@ -9,8 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytimetodo.R
 
-class AddWorkColorsAdapter(private val context: Context, private val colorList: List<Int>) :
-    RecyclerView.Adapter<AddWorkColorsAdapter.ColorViewHolder>() {
+class WorkColorsAdapter(private val context: Context, private val colorList: List<Int>) :
+    RecyclerView.Adapter<WorkColorsAdapter.ColorViewHolder>() {
 
     class ColorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val colorItem: CardView = view.findViewById(R.id.card_color)
@@ -47,4 +47,18 @@ class AddWorkColorsAdapter(private val context: Context, private val colorList: 
         fun onClick(position: Int, colorId: Int)
     }
 
+}
+
+fun WorkColorsAdapter.changeBackgroundColor(context: Context, view: View) {
+    this.setOnClickListener(object :
+        WorkColorsAdapter.OnClickListener {
+        override fun onClick(position: Int, colorId: Int) {
+            view.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    colorId
+                )
+            )
+        }
+    })
 }

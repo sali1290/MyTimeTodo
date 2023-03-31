@@ -19,7 +19,6 @@ import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.AddWorkColorsAdapter
 import com.example.mytimetodo.adapter.WorkColorList
 import com.example.mytimetodo.databinding.FragmentAddWorkBinding
-import com.example.mytimetodo.utility.getCurrentTime
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,9 +36,7 @@ class AddEditWorkFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var adapter: AddWorkColorsAdapter
-
-    private lateinit var currentTime: Pair<Int, Int>
-
+    private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +50,6 @@ class AddEditWorkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkAddOrEdit()
-        currentTime = getCurrentTime()
 
         setUpColorRecycler()
         setUpOnClickListeners()
@@ -105,7 +101,6 @@ class AddEditWorkFragment : Fragment() {
             val title = binding.etWorkTitle.text.toString()
             val body = binding.etWorkBody.text.toString()
             val isRoutine = binding.chbDaily.isChecked
-            val calendar = Calendar.getInstance()
             var date: Date?
 
 
@@ -144,8 +139,8 @@ class AddEditWorkFragment : Fragment() {
                                 //navigate to daily routine fragment and pop this fragment
                                 successfulWorkSave()
                             },
-                            currentTime.first,
-                            currentTime.second,
+                            calendar.get(Calendar.HOUR_OF_DAY),
+                            calendar.get(Calendar.MINUTE),
                             true
                         ).show()
                     } else {

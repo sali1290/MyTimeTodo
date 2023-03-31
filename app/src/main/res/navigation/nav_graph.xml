@@ -6,9 +6,9 @@
     app:startDestination="@id/dailyRoutineFragment">
     <fragment
         android:id="@+id/dailyRoutineFragment"
-        android:name="com.example.mytimetodo.fragment.DailyRoutineFragment"
+        android:name="com.example.mytimetodo.fragment.DailyRoutineWorksFragment"
         android:label="fragment_daily_routine"
-        tools:layout="@layout/fragment_daily_routine" >
+        tools:layout="@layout/fragment_daily_routine_works" >
         <action
             android:id="@+id/action_dailyRoutineFragment_to_addWorkFragment"
             app:destination="@id/addWorkFragment" />

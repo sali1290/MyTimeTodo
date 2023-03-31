@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.DailyRoutineAdapter
-import com.example.mytimetodo.databinding.FragmentDailyRoutineBinding
+import com.example.mytimetodo.databinding.FragmentDailyRoutineWorksBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -24,10 +24,10 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DailyRoutineFragment : Fragment() {
+class DailyRoutineWorksFragment : Fragment() {
 
-    private var _binding: FragmentDailyRoutineBinding? = null
-    private val binding: FragmentDailyRoutineBinding
+    private var _binding: FragmentDailyRoutineWorksBinding? = null
+    private val binding: FragmentDailyRoutineWorksBinding
         get() = _binding!!
 
     private lateinit var adapter: DailyRoutineAdapter
@@ -39,7 +39,7 @@ class DailyRoutineFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentDailyRoutineBinding.inflate(inflater, container, false)
+        _binding = FragmentDailyRoutineWorksBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -78,7 +78,7 @@ class DailyRoutineFragment : Fragment() {
                     } else {
                         adapter = DailyRoutineAdapter(it.data)
                         binding.recyclerDailyRoutine.adapter = adapter
-                        setUpAdapterRecyclerOnClickListener(adapter)
+                        setUpRecyclerAdapterOnClickListener(adapter)
                     }
                 }
 
@@ -111,7 +111,7 @@ class DailyRoutineFragment : Fragment() {
         }
     }
 
-    private fun setUpAdapterRecyclerOnClickListener(adapter: DailyRoutineAdapter) {
+    private fun setUpRecyclerAdapterOnClickListener(adapter: DailyRoutineAdapter) {
 
         val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
         val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
@@ -121,7 +121,7 @@ class DailyRoutineFragment : Fragment() {
                 setFragmentResult("requestKey", bundleOf("workKey" to work))
                 bottomAppBar.visibility = View.GONE
                 fab.visibility = View.GONE
-                findNavController().navigate(R.id.addWorkFragment)
+                findNavController().navigate(R.id.editWorkFragment)
             }
         })
     }

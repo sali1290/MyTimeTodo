@@ -15,15 +15,26 @@
         <action
             android:id="@+id/action_dailyRoutineFragment_to_otherWorksFragment"
             app:destination="@id/otherWorksFragment" />
+        <action
+            android:id="@+id/action_dailyRoutineFragment_to_editWorkFragment"
+            app:destination="@id/editWorkFragment" />
     </fragment>
     <fragment
         android:id="@+id/addWorkFragment"
-        android:name="com.example.mytimetodo.fragment.AddEditWorkFragment"
+        android:name="com.example.mytimetodo.fragment.AddWorkFragment"
         android:label="fragment_add_work"
         tools:layout="@layout/fragment_add_work" />
     <fragment
         android:id="@+id/otherWorksFragment"
         android:name="com.example.mytimetodo.fragment.OtherWorksFragment"
         android:label="fragment_other_works"
-        tools:layout="@layout/fragment_other_works" />
+        tools:layout="@layout/fragment_other_works" >
+        <action
+            android:id="@+id/action_otherWorksFragment_to_editWorkFragment"
+            app:destination="@id/editWorkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editWorkFragment"
+        android:name="com.example.mytimetodo.fragment.EditWorkFragment"
+        android:label="EditWorkFragment" />
 </navigation>

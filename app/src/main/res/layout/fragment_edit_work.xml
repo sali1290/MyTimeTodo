@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    tools:context=".fragment.AddWorkFragment">
+    tools:context=".fragment.EditWorkFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_add_work_color"
+        android:id="@+id/recycler_edit_work_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/today_work"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler_add_work_color" />
+        app:layout_constraintTop_toBottomOf="@id/recycler_edit_work_color" />
 
 
     <EditText

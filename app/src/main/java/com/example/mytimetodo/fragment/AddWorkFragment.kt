@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class AddEditWorkFragment : Fragment() {
+class AddWorkFragment : Fragment() {
 
     private var _binding: FragmentAddWorkBinding? = null
     private val binding: FragmentAddWorkBinding

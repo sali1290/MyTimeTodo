@@ -67,7 +67,7 @@ class AddWorkFragment : Fragment() {
 
         adapter = WorkColorsAdapter(requireContext(), WorkColorList.colorList)
         adapter.changeBackgroundColor(requireActivity(), binding.etWorkBody)
-        binding.recyclerAddWorkColor.adapter = adapter
+        binding.recyclerColors.adapter = adapter
     }
 
     private fun setUpOnClickListeners() {

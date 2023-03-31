@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.example.domain.model.Work
+import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.WorkColorList
 import com.example.mytimetodo.adapter.WorkColorsAdapter
 import com.example.mytimetodo.adapter.changeBackgroundColor
 import com.example.mytimetodo.databinding.FragmentEditWorkBinding
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +39,7 @@ class EditWorkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        onBackPressed()
         setUpColorRecycler()
         getWorkForEdit()
     }
@@ -69,7 +74,29 @@ class EditWorkFragment : Fragment() {
 
         adapter = WorkColorsAdapter(requireContext(), WorkColorList.colorList)
         adapter.changeBackgroundColor(requireActivity(), binding.etWorkBody)
-        binding.recyclerEditWorkColor.adapter = adapter
+        binding.recyclerColors.adapter = adapter
+    }
+
+    private fun onBackPressed() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Do custom work here
+                    requireActivity().apply {
+                        findViewById<FloatingActionButton>(R.id.fab).visibility =
+                            View.VISIBLE
+                        findViewById<BottomAppBar>(R.id.bottom_app_bar).visibility =
+                            View.VISIBLE
+                    }
+                    // if you want onBackPressed() to be called as normal afterwards
+                    if (isEnabled) {
+                        isEnabled = false
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                    }
+                }
+            }
+            )
     }
 
 }

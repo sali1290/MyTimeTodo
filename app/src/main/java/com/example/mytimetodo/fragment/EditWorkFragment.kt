@@ -126,7 +126,7 @@ class EditWorkFragment : Fragment() {
                                     )
                                 )
                                 //navigate to daily routine fragment and pop this fragment
-                                successfulWorkEdit()
+//                                successfulWorkEdit()
                             },
                             calendar.get(Calendar.HOUR_OF_DAY),
                             calendar.get(Calendar.MINUTE),
@@ -144,7 +144,7 @@ class EditWorkFragment : Fragment() {
                             )
                         )
                         //navigate to daily routine fragment and pop this fragment
-                        successfulWorkEdit()
+//                        successfulWorkEdit()
                     }
                 }
             }
@@ -224,7 +224,12 @@ class EditWorkFragment : Fragment() {
             findViewById<BottomAppBar>(R.id.bottom_app_bar).visibility =
                 View.VISIBLE
         }
-        findNavController().navigate(R.id.dailyRoutineFragment)
+        if (binding.chbDaily.isChecked) {
+            findNavController().navigate(R.id.dailyRoutineFragment)
+        } else {
+            findNavController().navigate(R.id.otherWorksFragment)
+        }
+
     }
 
 }

@@ -11,13 +11,12 @@ import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
-import com.example.mytimetodo.adapter.WorkColorsAdapter
 import com.example.mytimetodo.adapter.WorkColorList
+import com.example.mytimetodo.adapter.WorkColorsAdapter
 import com.example.mytimetodo.adapter.changeBackgroundColor
 import com.example.mytimetodo.databinding.FragmentAddWorkBinding
 import com.example.mytimetodo.viewmodel.HomeViewModel
@@ -189,7 +188,11 @@ class AddWorkFragment : Fragment() {
             findViewById<BottomAppBar>(R.id.bottom_app_bar).visibility =
                 View.VISIBLE
         }
-        findNavController().navigate(R.id.dailyRoutineFragment)
+        if (binding.chbDaily.isChecked) {
+            findNavController().navigate(R.id.dailyRoutineFragment)
+        } else {
+            findNavController().navigate(R.id.otherWorksFragment)
+        }
     }
 
 

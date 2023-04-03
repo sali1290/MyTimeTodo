@@ -81,70 +81,72 @@ class AddWorkFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            val title = binding.etWorkTitle.text.toString()
-            val body = binding.etWorkBody.text.toString()
-            val isRoutine = binding.chbDaily.isChecked
-            var date: Date?
+            saveWork()
+        }
+    }
+
+    private fun saveWork() {
+        val title = binding.etWorkTitle.text.toString()
+        val body = binding.etWorkBody.text.toString()
+        val isRoutine = binding.chbDaily.isChecked
+        var date: Date?
 
 
-            if (title.isEmpty()) {
-                binding.etWorkTitle.error = "Work Title shouldn't be empty"
+        if (title.isEmpty()) {
+            binding.etWorkTitle.error = "Work Title shouldn't be empty"
+        } else {
+            if (body.isEmpty()) {
+                binding.etWorkBody.error = "Work body shouldn't be empty"
             } else {
-                if (body.isEmpty()) {
-                    binding.etWorkBody.error = "Work body shouldn't be empty"
-                } else {
-                    //check if work is daily or other
-                    if (isRoutine) {
-                        //daily works
-                        //show TimePickerDialog
-                        TimePickerDialog(
-                            requireActivity(),
-                            { _, hourOfDay, minute ->
-                                calendar.set(
-                                    calendar.get(Calendar.YEAR),
-                                    calendar.get(Calendar.MONTH),
-                                    calendar.get(Calendar.DAY_OF_MONTH),
-                                    hourOfDay,
-                                    minute
-                                )
-                                date = calendar.time
-
-
-                                viewModel.addWork(
-                                    Work(
-                                        id = 0,
-                                        title = title,
-                                        body = body,
-                                        time = date,
-                                        color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
-                                    )
-                                )
-                                //navigate to daily routine fragment and pop this fragment
-                                successfulWorkSave()
-                            },
-                            calendar.get(Calendar.HOUR_OF_DAY),
-                            calendar.get(Calendar.MINUTE),
-                            true
-                        ).show()
-                    } else {
-                        //other works
-                        viewModel.addWork(
-                            Work(
-                                id = 0,
-                                title = title,
-                                body = body,
-                                time = null,
-                                color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                //check if work is daily or other
+                if (isRoutine) {
+                    //daily works
+                    //show TimePickerDialog
+                    TimePickerDialog(
+                        requireActivity(),
+                        { _, hourOfDay, minute ->
+                            calendar.set(
+                                calendar.get(Calendar.YEAR),
+                                calendar.get(Calendar.MONTH),
+                                calendar.get(Calendar.DAY_OF_MONTH),
+                                hourOfDay,
+                                minute
                             )
+                            date = calendar.time
+
+
+                            viewModel.addWork(
+                                Work(
+                                    id = 0,
+                                    title = title,
+                                    body = body,
+                                    time = date,
+                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                                )
+                            )
+                            //navigate to daily routine fragment and pop this fragment
+                            successfulWorkSave()
+                        },
+                        calendar.get(Calendar.HOUR_OF_DAY),
+                        calendar.get(Calendar.MINUTE),
+                        true
+                    ).show()
+                } else {
+                    //other works
+                    viewModel.addWork(
+                        Work(
+                            id = 0,
+                            title = title,
+                            body = body,
+                            time = null,
+                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
                         )
-                        //navigate to daily routine fragment and pop this fragment
-                        successfulWorkSave()
-                    }
+                    )
+                    //navigate to daily routine fragment and pop this fragment
+                    successfulWorkSave()
                 }
             }
         }
-
-
     }
 
     private fun onBackPressed() {

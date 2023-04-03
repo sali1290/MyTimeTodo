@@ -56,7 +56,7 @@ class EditWorkFragment : Fragment() {
         onBackPressed()
         setUpColorRecycler()
         getWorkForEdit()
-        setUpOnClicks()
+        setUpOnClicksListeners()
         observe()
     }
 
@@ -81,75 +81,14 @@ class EditWorkFragment : Fragment() {
         }
     }
 
-    private fun setUpOnClicks() {
+    private fun setUpOnClicksListeners() {
         binding.btnCancel.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
         binding.btnSave.setOnClickListener {
-            val title = binding.etWorkTitle.text.toString()
-            val body = binding.etWorkBody.text.toString()
-            val isRoutine = binding.chbDaily.isChecked
-            var date: Date?
-
-
-            if (title.isEmpty()) {
-                binding.etWorkTitle.error = "Work Title shouldn't be empty"
-            } else {
-                if (body.isEmpty()) {
-                    binding.etWorkBody.error = "Work body shouldn't be empty"
-                } else {
-                    //check if work is daily or other
-                    if (isRoutine && work.time != null) {
-                        //daily works
-                        //show TimePickerDialog
-                        TimePickerDialog(
-                            requireActivity(),
-                            { _, hourOfDay, minute ->
-                                calendar.set(
-                                    calendar.get(Calendar.YEAR),
-                                    calendar.get(Calendar.MONTH),
-                                    calendar.get(Calendar.DAY_OF_MONTH),
-                                    hourOfDay,
-                                    minute
-                                )
-                                date = calendar.time
-
-
-                                viewModel.updateWork(
-                                    Work(
-                                        id = work.id,
-                                        title = title,
-                                        body = body,
-                                        time = date,
-                                        color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
-                                    )
-                                )
-                                //navigate to daily routine fragment and pop this fragment
-//                                successfulWorkEdit()
-                            },
-                            calendar.get(Calendar.HOUR_OF_DAY),
-                            calendar.get(Calendar.MINUTE),
-                            true
-                        ).show()
-                    } else {
-                        //other works
-                        viewModel.updateWork(
-                            Work(
-                                id = work.id,
-                                title = title,
-                                body = body,
-                                time = null,
-                                color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
-                            )
-                        )
-                        //navigate to daily routine fragment and pop this fragment
-//                        successfulWorkEdit()
-                    }
-                }
-            }
+            saveEditedWork()
         }
-
     }
 
     private fun setUpColorRecycler() {
@@ -189,7 +128,6 @@ class EditWorkFragment : Fragment() {
     }
 
     private fun observe() {
-
         viewModel.updateResult.observe(viewLifecycleOwner) {
             if (it) {
                 successfulWorkEdit()
@@ -201,8 +139,66 @@ class EditWorkFragment : Fragment() {
                 ).show()
             }
         }
+    }
+
+    private fun saveEditedWork() {
+        val title = binding.etWorkTitle.text.toString()
+        val body = binding.etWorkBody.text.toString()
+        val isRoutine = binding.chbDaily.isChecked
+        var date: Date?
 
 
+        if (title.isEmpty()) {
+            binding.etWorkTitle.error = "Work Title shouldn't be empty"
+        } else {
+            if (body.isEmpty()) {
+                binding.etWorkBody.error = "Work body shouldn't be empty"
+            } else {
+                //check if work is daily or other
+                if (isRoutine) {
+                    //daily works
+                    //show TimePickerDialog
+                    TimePickerDialog(
+                        requireActivity(),
+                        { _, hourOfDay, minute ->
+                            calendar.set(
+                                calendar.get(Calendar.YEAR),
+                                calendar.get(Calendar.MONTH),
+                                calendar.get(Calendar.DAY_OF_MONTH),
+                                hourOfDay,
+                                minute
+                            )
+                            date = calendar.time
+
+
+                            viewModel.updateWork(
+                                Work(
+                                    id = work.id,
+                                    title = title,
+                                    body = body,
+                                    time = date,
+                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                                )
+                            )
+                        },
+                        calendar.get(Calendar.HOUR_OF_DAY),
+                        calendar.get(Calendar.MINUTE),
+                        true
+                    ).show()
+                } else {
+                    //other works
+                    viewModel.updateWork(
+                        Work(
+                            id = work.id,
+                            title = title,
+                            body = body,
+                            time = null,
+                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                        )
+                    )
+                }
+            }
+        }
     }
 
     private fun successfulWorkEdit() {
@@ -229,7 +225,6 @@ class EditWorkFragment : Fragment() {
         } else {
             findNavController().navigate(R.id.otherWorksFragment)
         }
-
     }
 
 }

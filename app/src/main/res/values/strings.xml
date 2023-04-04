@@ -13,4 +13,6 @@
     <string name="time">time</string>
     <string name="title">title</string>
     <string name="work_title">Work Title…</string>
+    <string name="edit_icon">Edit icon</string>
+    <string name="delete_icon">Delete icon</string>
 </resources>

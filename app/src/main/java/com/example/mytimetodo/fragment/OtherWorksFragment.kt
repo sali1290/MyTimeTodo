@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -114,12 +115,17 @@ class OtherWorksFragment : Fragment() {
         val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
         val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
 
-        adapter.setOnClickListener(object : DailyRoutineAdapter.OnClickListener {
+        adapter.setOnEditClickListener(object : DailyRoutineAdapter.OnEditIconClickListener {
             override fun onClick(position: Int, work: Work) {
                 setFragmentResult("requestKey", bundleOf("workKey" to work))
                 bottomAppBar.visibility = View.GONE
                 fab.visibility = View.GONE
                 findNavController().navigate(R.id.editWorkFragment)
+            }
+        })
+        adapter.setOnDeleteClickListener(object : DailyRoutineAdapter.OnDeleteIconClickListener {
+            override fun onClick(position: Int, work: Work) {
+                Toast.makeText(requireActivity(), "Delete this work", Toast.LENGTH_SHORT).show()
             }
         })
     }

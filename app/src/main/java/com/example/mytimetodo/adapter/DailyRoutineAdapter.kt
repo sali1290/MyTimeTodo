@@ -3,6 +3,7 @@ package com.example.mytimetodo.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,8 @@ class DailyRoutineAdapter(private val data: List<Work>) :
         val title: TextView = view.findViewById(R.id.tv_title)
         val body: TextView = view.findViewById(R.id.tv_body)
         val time: TextView = view.findViewById(R.id.tv_time)
+        val icEdit: ImageView = view.findViewById(R.id.img_edit)
+        val icDelete: ImageView = view.findViewById(R.id.img_delete)
     }
 
 
@@ -42,9 +45,15 @@ class DailyRoutineAdapter(private val data: List<Work>) :
                     SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
             }
 
-            workItem.setOnClickListener {
-                if (onClickListener != null) {
-                    onClickListener!!.onClick(position, data[position])
+            icEdit.setOnClickListener {
+                if (onEditIconClickListener != null) {
+                    onEditIconClickListener!!.onClick(position, data[position])
+                }
+            }
+
+            icDelete.setOnClickListener {
+                if (onDeleteIconClickListener != null) {
+                    onDeleteIconClickListener!!.onClick(position, data[position])
                 }
             }
         }
@@ -52,12 +61,28 @@ class DailyRoutineAdapter(private val data: List<Work>) :
 
     override fun getItemCount() = data.size
 
-    private var onClickListener: OnClickListener? = null
-    fun setOnClickListener(onClickListener: OnClickListener) {
-        this.onClickListener = onClickListener
+    //Listener for icon edit
+    private var onEditIconClickListener: OnEditIconClickListener? = null
+    fun setOnEditClickListener(
+        onEditIconClickListener: OnEditIconClickListener,
+    ) {
+        this.onEditIconClickListener = onEditIconClickListener
     }
 
-    interface OnClickListener {
+    interface OnEditIconClickListener {
         fun onClick(position: Int, work: Work)
+    }
+
+    //Listener for icon delete
+    private var onDeleteIconClickListener: OnDeleteIconClickListener? = null
+
+    interface OnDeleteIconClickListener {
+        fun onClick(position: Int, work: Work)
+    }
+
+    fun setOnDeleteClickListener(
+        onDeleteIconClickListener: OnDeleteIconClickListener
+    ) {
+        this.onDeleteIconClickListener = onDeleteIconClickListener
     }
 }

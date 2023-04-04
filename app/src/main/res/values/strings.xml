@@ -15,4 +15,5 @@
     <string name="work_title">Work Title…</string>
     <string name="edit_icon">Edit icon</string>
     <string name="delete_icon">Delete icon</string>
+    <string name="check_icon">Check icon</string>
 </resources>

@@ -125,9 +125,27 @@ class OtherWorksFragment : Fragment() {
         })
         adapter.setOnDeleteClickListener(object : DailyRoutineAdapter.OnDeleteIconClickListener {
             override fun onClick(position: Int, work: Work) {
-                Toast.makeText(requireActivity(), "Delete this work", Toast.LENGTH_SHORT).show()
+                viewModel.deleteWork(work)
+                observeDeleteResult(adapter, position)
             }
         })
+    }
+
+    private fun observeDeleteResult(adapter: DailyRoutineAdapter, position: Int) {
+        viewModel.deleteResult.observe(viewLifecycleOwner) {
+            if (it) {
+                adapter.notifyItemRemoved(position)
+                Toast.makeText(requireActivity(), "Work deleted successfully", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(
+                    requireActivity(),
+                    "Something went wrong! please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
     }
 
 }

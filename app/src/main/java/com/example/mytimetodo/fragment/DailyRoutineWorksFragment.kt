@@ -131,6 +131,35 @@ class DailyRoutineWorksFragment : Fragment() {
                 observeDeleteResult(adapter, position)
             }
         })
+        adapter.setOnDoneIconClickListener(object : DailyRoutineAdapter.OnDoneIconClickListener {
+            override fun onClick(position: Int, work: Work) {
+                if (work.isDone) {
+                    viewModel.updateWork(
+                        Work(
+                            id = work.id,
+                            title = work.title,
+                            time = work.time,
+                            body = work.body,
+                            color = work.color,
+                            isDone = false
+                        )
+                    )
+                } else {
+                    viewModel.updateWork(
+                        Work(
+                            id = work.id,
+                            title = work.title,
+                            time = work.time,
+                            body = work.body,
+                            color = work.color,
+                            isDone = true
+                        )
+                    )
+                }
+                adapter.notifyItemChanged(position)
+            }
+
+        })
     }
 
     private fun observeDeleteResult(adapter: DailyRoutineAdapter, position: Int) {

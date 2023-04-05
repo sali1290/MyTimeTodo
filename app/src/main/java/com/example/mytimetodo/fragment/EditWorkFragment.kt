@@ -177,7 +177,8 @@ class EditWorkFragment : Fragment() {
                                     title = title,
                                     body = body,
                                     time = date,
-                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString(),
+                                    isDone = work.isDone
                                 )
                             )
                         },
@@ -193,7 +194,8 @@ class EditWorkFragment : Fragment() {
                             title = title,
                             body = body,
                             time = null,
-                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString(),
+                            isDone = work.isDone
                         )
                     )
                 }

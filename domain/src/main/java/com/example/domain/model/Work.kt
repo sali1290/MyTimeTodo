@@ -13,6 +13,8 @@ data class Work(
 
     val body: String,
 
-    val color: String
+    val color: String,
 
-): Serializable
+    val isDone: Boolean
+
+) : Serializable

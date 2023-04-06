@@ -47,6 +47,7 @@ class DailyRoutineWorksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpOnClickListeners()
         onBackPressed()
         viewModel.getDailyRoutineWorks()
         observe()
@@ -55,6 +56,17 @@ class DailyRoutineWorksFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setUpOnClickListeners() {
+        binding.btnFinishedWork.setOnClickListener {
+            val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
+            val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
+
+            bottomAppBar.visibility = View.GONE
+            fab.visibility = View.GONE
+            findNavController().navigate(R.id.doneWorksFragment)
+        }
     }
 
     private fun onBackPressed() {

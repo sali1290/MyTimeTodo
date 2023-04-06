@@ -24,6 +24,28 @@ class HomeViewModel @Inject constructor(
     private val updateWork: UpdateWork,
 ) : ViewModel() {
 
+    private val _doneWorks = MutableLiveData<Result<List<Work>>>()
+    val doneWorks: LiveData<Result<List<Work>>>
+        get() = _doneWorks
+
+    fun getDoneWorks() = viewModelScope.launch(Dispatchers.IO) {
+        _doneWorks.postValue(Result.Loading)
+        try {
+            val workList = getAllWorks.invoke().filter {
+                it.isDone
+            }
+            _doneWorks.postValue(
+                Result.Success(workList)
+            )
+        } catch (e: IOException) {
+            _doneWorks.postValue(
+                Result.Error(
+                    e.message ?: "Something went wrong! please try again later."
+                )
+            )
+        }
+    }
+
     private val _dailyWorks = MutableLiveData<Result<List<Work>>>()
     val dailyWorks: LiveData<Result<List<Work>>>
         get() = _dailyWorks

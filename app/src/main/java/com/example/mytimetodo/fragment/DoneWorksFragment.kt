@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.mytimetodo.databinding.FragmentDoneWorksBinding
+import com.example.mytimetodo.utility.customOnBackPressed
 
 class DoneWorksFragment : Fragment() {
 
@@ -21,6 +22,12 @@ class DoneWorksFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDoneWorksBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().customOnBackPressed(viewLifecycleOwner)
     }
 
     override fun onDestroyView() {

@@ -6,15 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".fragment.DailyRoutineWorksFragment">
 
-    <Button
+    <LinearLayout
         android:id="@+id/btn_finished_work"
-        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/finished_works"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/finished_works"
+            android:src="@drawable/ic_done_works"
+            app:tint="@color/accent_color" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/finished_works"
+            android:gravity="top"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_daily_routine"

@@ -1,11 +1,9 @@
 package com.example.mytimetodo.fragment
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
@@ -18,10 +16,10 @@ import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.DailyRoutineAdapter
 import com.example.mytimetodo.databinding.FragmentOtherWorksBinding
 import com.example.mytimetodo.utility.Result
+import com.example.mytimetodo.utility.showTopSnackBar
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -81,19 +79,10 @@ class OtherWorksFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    val snackBar = Snackbar.make(
-                        requireContext(),
+                    requireActivity().showTopSnackBar(
                         binding.tvEmpty,
-                        it.message,
-                        Snackbar.LENGTH_SHORT
+                        it.message
                     )
-                    (snackBar.view.layoutParams as (FrameLayout.LayoutParams)).gravity =
-                        Gravity.TOP
-                    snackBar.setAction("Ok") {
-                        snackBar.dismiss()
-                    }
-                    snackBar.show()
-
                     binding.apply {
                         recyclerOtherWorks.visibility = View.GONE
                         tvEmpty.visibility = View.VISIBLE

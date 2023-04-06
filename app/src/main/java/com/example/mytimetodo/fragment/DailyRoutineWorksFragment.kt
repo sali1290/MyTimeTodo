@@ -18,6 +18,7 @@ import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.DailyRoutineAdapter
 import com.example.mytimetodo.databinding.FragmentDailyRoutineWorksBinding
 import com.example.mytimetodo.utility.Result
+import com.example.mytimetodo.utility.showTopSnackBar
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -100,20 +101,10 @@ class DailyRoutineWorksFragment : Fragment() {
                 }
 
                 is Result.Error -> {
-                    val snackBar = Snackbar.make(
-                        requireContext(),
+                    requireActivity().showTopSnackBar(
                         binding.tvEmpty,
-                        it.message,
-                        Snackbar.LENGTH_SHORT
+                        it.message
                     )
-                    (snackBar.view.layoutParams as (FrameLayout.LayoutParams)).gravity =
-                        Gravity.TOP
-                    snackBar.setAction("Ok") {
-                        snackBar.dismiss()
-                    }
-                    snackBar.show()
-
-
                     binding.apply {
                         recyclerDailyRoutine.visibility = View.GONE
                         tvEmpty.visibility = View.VISIBLE

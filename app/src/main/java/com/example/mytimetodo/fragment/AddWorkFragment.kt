@@ -3,11 +3,9 @@ package com.example.mytimetodo.fragment
 import android.app.TimePickerDialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,10 +17,10 @@ import com.example.mytimetodo.adapter.WorkColorsAdapter
 import com.example.mytimetodo.adapter.changeBackgroundColor
 import com.example.mytimetodo.databinding.FragmentAddWorkBinding
 import com.example.mytimetodo.utility.customOnBackPressed
+import com.example.mytimetodo.utility.showTopSnackBar
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -152,18 +150,8 @@ class AddWorkFragment : Fragment() {
     }
 
     private fun successfulWorkSave() {
-        val snackBar = Snackbar.make(
-            requireContext(),
-            binding.btnSave,
-            "Work saved",
-            Snackbar.LENGTH_SHORT
-        )
-        (snackBar.view.layoutParams as (FrameLayout.LayoutParams)).gravity =
-            Gravity.TOP
-        snackBar.setAction("Ok") {
-            snackBar.dismiss()
-        }
-        snackBar.show()
+        requireActivity().showTopSnackBar(binding.btnSave, "Work saved")
+
         requireActivity().apply {
             findViewById<FloatingActionButton>(R.id.fab).visibility =
                 View.VISIBLE

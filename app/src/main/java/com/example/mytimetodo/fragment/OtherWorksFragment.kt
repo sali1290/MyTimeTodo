@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
-import com.example.mytimetodo.adapter.DailyRoutineAdapter
+import com.example.mytimetodo.adapter.WorksAdapter
 import com.example.mytimetodo.databinding.FragmentOtherWorksBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.utility.showTopSnackBar
@@ -68,7 +68,7 @@ class OtherWorksFragment : Fragment() {
                             tvEmpty.visibility = View.VISIBLE
                         }
                     } else {
-                        val adapter = DailyRoutineAdapter(it.data)
+                        val adapter = WorksAdapter(it.data)
                         binding.recyclerOtherWorks.adapter = adapter
                         setUpAdapterRecyclerOnClickListener(adapter)
                     }
@@ -99,12 +99,12 @@ class OtherWorksFragment : Fragment() {
         _binding = null
     }
 
-    private fun setUpAdapterRecyclerOnClickListener(adapter: DailyRoutineAdapter) {
+    private fun setUpAdapterRecyclerOnClickListener(adapter: WorksAdapter) {
 
         val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
         val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
 
-        adapter.setOnEditClickListener(object : DailyRoutineAdapter.OnEditIconClickListener {
+        adapter.setOnEditClickListener(object : WorksAdapter.OnEditIconClickListener {
             override fun onClick(position: Int, work: Work) {
                 setFragmentResult("requestKey", bundleOf("workKey" to work))
                 bottomAppBar.visibility = View.GONE
@@ -112,7 +112,7 @@ class OtherWorksFragment : Fragment() {
                 findNavController().navigate(R.id.editWorkFragment)
             }
         })
-        adapter.setOnDeleteClickListener(object : DailyRoutineAdapter.OnDeleteIconClickListener {
+        adapter.setOnDeleteClickListener(object : WorksAdapter.OnDeleteIconClickListener {
             override fun onClick(position: Int, work: Work) {
                 viewModel.deleteWork(work)
                 observeDeleteResult(adapter, position)
@@ -120,12 +120,11 @@ class OtherWorksFragment : Fragment() {
         })
     }
 
-    private fun observeDeleteResult(adapter: DailyRoutineAdapter, position: Int) {
+    private fun observeDeleteResult(adapter: WorksAdapter, position: Int) {
         viewModel.deleteResult.observe(viewLifecycleOwner) {
             if (it) {
                 adapter.notifyItemRemoved(position)
-                Toast.makeText(requireActivity(), "Work deleted successfully", Toast.LENGTH_SHORT)
-                    .show()
+                viewModel.getOtherWorks()
             } else {
                 Toast.makeText(
                     requireActivity(),

@@ -54,7 +54,7 @@ class HomeViewModel @Inject constructor(
         _dailyWorks.postValue(Result.Loading)
         try {
             val workList = getAllWorks.invoke().filter {
-                it.time != null
+                it.time != null && !it.isDone
             }
             _dailyWorks.postValue(
                 Result.Success(workList)

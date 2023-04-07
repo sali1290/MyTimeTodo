@@ -12,8 +12,8 @@ import com.example.mytimetodo.R
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
-class DailyRoutineAdapter(private val data: List<Work>) :
-    RecyclerView.Adapter<DailyRoutineAdapter.DailyRoutineViewHolder>() {
+class WorksAdapter(private val data: List<Work>) :
+    RecyclerView.Adapter<WorksAdapter.DailyRoutineViewHolder>() {
 
     class DailyRoutineViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val workItem: CardView = view.findViewById(R.id.work_item)

@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
-import com.example.mytimetodo.adapter.DailyRoutineAdapter
+import com.example.mytimetodo.adapter.WorksAdapter
 import com.example.mytimetodo.databinding.FragmentDailyRoutineWorksBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.utility.showTopSnackBar
@@ -29,7 +29,7 @@ class DailyRoutineWorksFragment : Fragment() {
     private val binding: FragmentDailyRoutineWorksBinding
         get() = _binding!!
 
-    private lateinit var adapter: DailyRoutineAdapter
+    private lateinit var adapter: WorksAdapter
 
     private val viewModel: HomeViewModel by viewModels()
 
@@ -65,6 +65,15 @@ class DailyRoutineWorksFragment : Fragment() {
             fab.visibility = View.GONE
             findNavController().navigate(R.id.doneWorksFragment)
         }
+
+        binding.btnFinishedWork.setOnClickListener {
+            val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
+            val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
+
+            bottomAppBar.visibility = View.GONE
+            fab.visibility = View.GONE
+            findNavController().navigate(R.id.doneWorksFragment)
+        }
     }
 
     private fun onBackPressed() {
@@ -87,7 +96,7 @@ class DailyRoutineWorksFragment : Fragment() {
                             tvEmpty.visibility = View.VISIBLE
                         }
                     } else {
-                        adapter = DailyRoutineAdapter(it.data)
+                        adapter = WorksAdapter(it.data)
                         binding.recyclerDailyRoutine.adapter = adapter
                         setUpRecyclerAdapterOnClickListener(adapter)
                     }
@@ -112,12 +121,12 @@ class DailyRoutineWorksFragment : Fragment() {
         }
     }
 
-    private fun setUpRecyclerAdapterOnClickListener(adapter: DailyRoutineAdapter) {
+    private fun setUpRecyclerAdapterOnClickListener(adapter: WorksAdapter) {
 
         val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
         val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
 
-        adapter.setOnEditClickListener(object : DailyRoutineAdapter.OnEditIconClickListener {
+        adapter.setOnEditClickListener(object : WorksAdapter.OnEditIconClickListener {
             override fun onClick(position: Int, work: Work) {
                 setFragmentResult("requestKey", bundleOf("workKey" to work))
                 bottomAppBar.visibility = View.GONE
@@ -125,13 +134,13 @@ class DailyRoutineWorksFragment : Fragment() {
                 findNavController().navigate(R.id.editWorkFragment)
             }
         })
-        adapter.setOnDeleteClickListener(object : DailyRoutineAdapter.OnDeleteIconClickListener {
+        adapter.setOnDeleteClickListener(object : WorksAdapter.OnDeleteIconClickListener {
             override fun onClick(position: Int, work: Work) {
                 viewModel.deleteWork(work)
                 observeDeleteResult(adapter, position)
             }
         })
-        adapter.setOnDoneIconClickListener(object : DailyRoutineAdapter.OnDoneIconClickListener {
+        adapter.setOnDoneIconClickListener(object : WorksAdapter.OnDoneIconClickListener {
             override fun onClick(position: Int, work: Work) {
                 if (work.isDone) {
                     viewModel.updateWork(
@@ -156,16 +165,32 @@ class DailyRoutineWorksFragment : Fragment() {
                         )
                     )
                 }
-                adapter.notifyItemChanged(position)
+                observeUpdateResult(adapter, position)
             }
 
         })
     }
 
-    private fun observeDeleteResult(adapter: DailyRoutineAdapter, position: Int) {
+    private fun observeUpdateResult(adapter: WorksAdapter, position: Int) {
+        viewModel.updateResult.observe(viewLifecycleOwner) {
+            if (it) {
+                adapter.notifyItemRemoved(position)
+                viewModel.getDailyRoutineWorks()
+            } else {
+                Toast.makeText(
+                    requireActivity(),
+                    "Something went wrong! please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun observeDeleteResult(adapter: WorksAdapter, position: Int) {
         viewModel.deleteResult.observe(viewLifecycleOwner) {
             if (it) {
                 adapter.notifyItemRemoved(position)
+                viewModel.getDailyRoutineWorks()
                 Toast.makeText(requireActivity(), "Work deleted successfully", Toast.LENGTH_SHORT)
                     .show()
             } else {
@@ -176,8 +201,9 @@ class DailyRoutineWorksFragment : Fragment() {
                 ).show()
             }
         }
-
     }
+
+
 
 
 }

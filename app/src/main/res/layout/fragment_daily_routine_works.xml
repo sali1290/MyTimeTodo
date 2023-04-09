@@ -15,18 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/btn_finished_work"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
-            android:layout_weight=".4"
-            android:background="@drawable/border"
-            android:gravity="center"
-            android:text="@string/finished_works"
-            android:textSize="15sp"
-            app:drawableTint="@color/accent_color"
-            app:drawableTopCompat="@drawable/ic_done_works" />
 
         <TextView
             android:id="@+id/btn_delete_all"

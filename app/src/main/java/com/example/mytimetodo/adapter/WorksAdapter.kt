@@ -22,8 +22,6 @@ class WorksAdapter(private val data: List<Work>) :
         val time: TextView = view.findViewById(R.id.tv_time)
         val icEdit: ImageView = view.findViewById(R.id.img_edit)
         val icDelete: ImageView = view.findViewById(R.id.img_delete)
-        val icIsDone: ImageView = view.findViewById(R.id.img_isDone)
-        val imgCheck: ImageView = view.findViewById(R.id.img_check_done)
     }
 
 
@@ -47,13 +45,6 @@ class WorksAdapter(private val data: List<Work>) :
                     SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
             }
 
-            if (data[position].isDone) {
-                icIsDone.setImageResource(R.drawable.ic_undo)
-                imgCheck.visibility = View.VISIBLE
-            } else {
-                icIsDone.setImageResource(R.drawable.ic_check)
-                imgCheck.visibility = View.GONE
-            }
 
             icEdit.setOnClickListener {
                 if (onEditIconClickListener != null) {
@@ -67,18 +58,6 @@ class WorksAdapter(private val data: List<Work>) :
                 }
             }
 
-            icIsDone.setOnClickListener {
-                if (onDoneIconClickListener != null) {
-                    onDoneIconClickListener!!.onClick(position, data[position])
-                }
-                if (data[position].isDone) {
-                    icIsDone.setImageResource(R.drawable.ic_undo)
-                    imgCheck.visibility = View.VISIBLE
-                } else {
-                    icIsDone.setImageResource(R.drawable.ic_check)
-                    imgCheck.visibility = View.GONE
-                }
-            }
         }
     }
 
@@ -107,16 +86,6 @@ class WorksAdapter(private val data: List<Work>) :
         onDeleteIconClickListener: OnDeleteIconClickListener
     ) {
         this.onDeleteIconClickListener = onDeleteIconClickListener
-    }
-
-    private var onDoneIconClickListener: OnDoneIconClickListener? = null
-
-    fun setOnDoneIconClickListener(onDoneIconClickListener: OnDoneIconClickListener) {
-        this.onDoneIconClickListener = onDoneIconClickListener
-    }
-
-    interface OnDoneIconClickListener {
-        fun onClick(position: Int, work: Work)
     }
 
 

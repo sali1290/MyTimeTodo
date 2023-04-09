@@ -57,23 +57,6 @@ class DailyRoutineWorksFragment : Fragment() {
     }
 
     private fun setUpOnClickListeners() {
-        binding.btnFinishedWork.setOnClickListener {
-            val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
-            val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
-
-            bottomAppBar.visibility = View.GONE
-            fab.visibility = View.GONE
-            findNavController().navigate(R.id.doneWorksFragment)
-        }
-
-        binding.btnFinishedWork.setOnClickListener {
-            val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
-            val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
-
-            bottomAppBar.visibility = View.GONE
-            fab.visibility = View.GONE
-            findNavController().navigate(R.id.doneWorksFragment)
-        }
     }
 
     private fun onBackPressed() {
@@ -140,50 +123,6 @@ class DailyRoutineWorksFragment : Fragment() {
                 observeDeleteResult(adapter, position)
             }
         })
-        adapter.setOnDoneIconClickListener(object : WorksAdapter.OnDoneIconClickListener {
-            override fun onClick(position: Int, work: Work) {
-                if (work.isDone) {
-                    viewModel.updateWork(
-                        Work(
-                            id = work.id,
-                            title = work.title,
-                            time = work.time,
-                            body = work.body,
-                            color = work.color,
-                            isDone = false
-                        )
-                    )
-                } else {
-                    viewModel.updateWork(
-                        Work(
-                            id = work.id,
-                            title = work.title,
-                            time = work.time,
-                            body = work.body,
-                            color = work.color,
-                            isDone = true
-                        )
-                    )
-                }
-                observeUpdateResult(adapter, position)
-            }
-
-        })
-    }
-
-    private fun observeUpdateResult(adapter: WorksAdapter, position: Int) {
-        viewModel.updateResult.observe(viewLifecycleOwner) {
-            if (it) {
-                adapter.notifyItemRemoved(position)
-                viewModel.getDailyRoutineWorks()
-            } else {
-                Toast.makeText(
-                    requireActivity(),
-                    "Something went wrong! please try again",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
     }
 
     private fun observeDeleteResult(adapter: WorksAdapter, position: Int) {

@@ -15,6 +15,4 @@ data class Work(
 
     val color: String,
 
-    val isDone: Boolean
-
 ) : Serializable

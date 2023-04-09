@@ -24,6 +24,4 @@ data class WorkModel(
     @ColumnInfo(name = "work_color")
     val color: String,
 
-    @ColumnInfo(name = "work_isDone")
-    val isDone: Boolean,
 )

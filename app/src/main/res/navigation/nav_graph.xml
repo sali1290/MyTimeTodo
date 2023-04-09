@@ -18,9 +18,6 @@
         <action
             android:id="@+id/action_dailyRoutineFragment_to_editWorkFragment"
             app:destination="@id/editWorkFragment" />
-        <action
-            android:id="@+id/action_dailyRoutineFragment_to_doneWorksFragment"
-            app:destination="@id/doneWorksFragment" />
     </fragment>
     <fragment
         android:id="@+id/addWorkFragment"
@@ -35,17 +32,9 @@
         <action
             android:id="@+id/action_otherWorksFragment_to_editWorkFragment"
             app:destination="@id/editWorkFragment" />
-        <action
-            android:id="@+id/action_otherWorksFragment_to_doneWorksFragment"
-            app:destination="@id/doneWorksFragment" />
     </fragment>
     <fragment
         android:id="@+id/editWorkFragment"
         android:name="com.example.mytimetodo.fragment.EditWorkFragment"
         android:label="EditWorkFragment" />
-    <fragment
-        android:id="@+id/doneWorksFragment"
-        android:name="com.example.mytimetodo.fragment.DoneWorksFragment"
-        android:label="fragment_done_works"
-        tools:layout="@layout/fragment_done_works" />
 </navigation>

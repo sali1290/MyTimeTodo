@@ -119,8 +119,7 @@ class AddWorkFragment : Fragment() {
                                     title = title,
                                     body = body,
                                     time = date,
-                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString(),
-                                    isDone = false
+                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
                                 )
                             )
                             //navigate to daily routine fragment and pop this fragment
@@ -138,8 +137,7 @@ class AddWorkFragment : Fragment() {
                             title = title,
                             body = body,
                             time = null,
-                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString(),
-                            isDone = false
+                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
                         )
                     )
                     //navigate to daily routine fragment and pop this fragment

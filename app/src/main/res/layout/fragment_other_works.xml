@@ -6,44 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".fragment.OtherWorksFragment">
 
-    <LinearLayout
+    <HorizontalScrollView
         android:id="@+id/table_btns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <TextView
-            android:id="@+id/btn_delete_all"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
-            android:layout_weight=".4"
-            android:background="@drawable/border"
-            android:gravity="center"
-            android:text="@string/delete_all_works"
-            android:textSize="15sp"
-            app:drawableTint="@color/accent_color"
-            app:drawableTopCompat="@drawable/ic_delete" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/btn_sort_by_color"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:layout_margin="5dp"
-            android:layout_weight=".4"
-            android:background="@drawable/border"
-            android:gravity="center"
-            android:text="@string/sort_by_color"
-            android:textSize="15sp"
-            app:drawableTint="@color/accent_color"
-            app:drawableTopCompat="@drawable/ic_sort_by_color" />
+            <TextView
+                android:id="@+id/btn_sort_by_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/sort_by_color"
+                android:textSize="15sp"
+                app:drawableTint="@color/accent_color"
+                app:drawableTopCompat="@drawable/ic_sort_by_color" />
+
+            <TextView
+                android:id="@+id/btn_sort_by_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/sort_by_title"
+                android:textSize="15sp"
+                app:drawableTint="@color/accent_color"
+                app:drawableTopCompat="@drawable/ic_sort_by_title" />
+
+            <TextView
+                android:id="@+id/btn_sort_by_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/sort_by_time"
+                android:textSize="15sp"
+                app:drawableTint="@color/accent_color"
+                app:drawableTopCompat="@drawable/ic_sort_by_time" />
 
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/btn_delete_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/delete_all_works"
+                android:textSize="15sp"
+                app:drawableTint="@color/accent_color"
+                app:drawableTopCompat="@drawable/ic_delete" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_other_works"

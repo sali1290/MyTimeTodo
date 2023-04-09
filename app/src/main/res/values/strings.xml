@@ -18,4 +18,6 @@
     <string name="finished_works">Finished works</string>
     <string name="sort_by_color">Sort by color</string>
     <string name="delete_all_works">Delete all works</string>
+    <string name="sort_by_time">Sort by time</string>
+    <string name="sort_by_title">Sort by title</string>
 </resources>

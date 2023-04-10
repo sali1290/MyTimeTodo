@@ -44,6 +44,7 @@ class OtherWorksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         onBackPressed()
+        setUpOnClickListeners()
         viewModel.getOtherWorks()
         observe()
     }
@@ -97,6 +98,20 @@ class OtherWorksFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setUpOnClickListeners() {
+        binding.btnSortByColor.setOnClickListener {
+            viewModel.getSortedWorksDailyByColor()
+        }
+
+        binding.btnSortByTitle.setOnClickListener {
+            viewModel.getSortedDailyWorksByTitle()
+        }
+
+        binding.btnSortByTime.setOnClickListener {
+            viewModel.getSortedDailyWorksByTime()
+        }
     }
 
     private fun setUpAdapterRecyclerOnClickListener(adapter: WorksAdapter) {

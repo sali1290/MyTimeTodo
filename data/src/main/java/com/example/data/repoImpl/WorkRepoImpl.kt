@@ -33,4 +33,16 @@ class WorkRepoImpl @Inject constructor(
         return dbDao.updateWork(mapper.toWorkModel(work)) != 0
     }
 
+    override suspend fun getWorksByColor(): List<Work> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getWorksByTitle(): List<Work> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getWorksByTime(): List<Work> {
+        TODO("Not yet implemented")
+    }
+
 }

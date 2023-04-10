@@ -1,4 +1,10 @@
 package com.example.domain.usecase
 
-class GetWorksByColor {
+import com.example.domain.repo.WorkRepo
+import javax.inject.Inject
+
+class GetWorksByColor @Inject constructor(private val workRepo: WorkRepo) {
+
+    suspend fun invoke() = workRepo.getWorksByColor()
+
 }

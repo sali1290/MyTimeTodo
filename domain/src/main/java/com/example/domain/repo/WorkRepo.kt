@@ -12,4 +12,9 @@ interface WorkRepo {
 
     suspend fun updateWork(work: Work): Boolean
 
+    suspend fun getWorksByColor(): List<Work>
+
+    suspend fun getWorksByTitle(): List<Work>
+
+    suspend fun getWorksByTime(): List<Work>
 }

@@ -59,18 +59,6 @@
                 app:drawableTopCompat="@drawable/ic_sort_by_time" />
 
 
-            <TextView
-                android:id="@+id/btn_delete_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@drawable/border"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/delete_all_works"
-                android:textSize="15sp"
-                app:drawableTint="@color/accent_color"
-                app:drawableTopCompat="@drawable/ic_delete" />
         </LinearLayout>
     </HorizontalScrollView>
 

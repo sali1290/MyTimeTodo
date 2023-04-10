@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.Work
-import com.example.domain.usecase.AddWork
-import com.example.domain.usecase.DeleteWork
-import com.example.domain.usecase.GetAllWorks
-import com.example.domain.usecase.UpdateWork
+import com.example.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,6 +19,9 @@ class HomeViewModel @Inject constructor(
     private val addWork: AddWork,
     private val deleteWork: DeleteWork,
     private val updateWork: UpdateWork,
+    private val getWorksByColor: GetWorksByColor,
+    private val getWorksByTitle: GetWorksByTitle,
+    private val getWorksByTime: GetWorksByTime
 ) : ViewModel() {
 
     private val _dailyWorks = MutableLiveData<Result<List<Work>>>()
@@ -90,6 +90,54 @@ class HomeViewModel @Inject constructor(
 
     fun updateWork(work: Work) = viewModelScope.launch(Dispatchers.IO) {
         _updateResult.postValue(updateWork.invoke(work))
+    }
+
+    fun getSortedWorksDailyByColor() = viewModelScope.launch(Dispatchers.IO) {
+        _dailyWorks.postValue(Result.Loading)
+        try {
+            val workList = getWorksByColor.invoke().filter {
+                it.time != null
+            }
+            _dailyWorks.postValue(Result.Success(workList))
+        } catch (e: IOException) {
+            _dailyWorks.postValue(
+                Result.Error(
+                    e.message ?: "Something went wrong! please try again later."
+                )
+            )
+        }
+    }
+
+    fun getSortedDailyWorksByTitle() = viewModelScope.launch(Dispatchers.IO) {
+        _dailyWorks.postValue(Result.Loading)
+        try {
+            val workList = getWorksByTitle.invoke().filter {
+                it.time != null
+            }
+            _dailyWorks.postValue(Result.Success(workList))
+        } catch (e: IOException) {
+            _dailyWorks.postValue(
+                Result.Error(
+                    e.message ?: "Something went wrong! please try again later."
+                )
+            )
+        }
+    }
+
+    fun getSortedDailyWorksByTime() = viewModelScope.launch(Dispatchers.IO) {
+        _dailyWorks.postValue(Result.Loading)
+        try {
+            val workList = getWorksByTime.invoke().filter {
+                it.time != null
+            }
+            _dailyWorks.postValue(Result.Success(workList))
+        } catch (e: IOException) {
+            _dailyWorks.postValue(
+                Result.Error(
+                    e.message ?: "Something went wrong! please try again later."
+                )
+            )
+        }
     }
 
 

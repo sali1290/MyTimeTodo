@@ -141,4 +141,51 @@ class HomeViewModel @Inject constructor(
     }
 
 
+    fun getSortedOtherWorksByColor() = viewModelScope.launch(Dispatchers.IO) {
+        _dailyWorks.postValue(Result.Loading)
+        try {
+            val workList = getWorksByTime.invoke().filter {
+                it.time == null
+            }
+            _dailyWorks.postValue(Result.Success(workList))
+        } catch (e: IOException) {
+            _dailyWorks.postValue(
+                Result.Error(
+                    e.message ?: "Something went wrong! please try again later."
+                )
+            )
+        }
+    }
+
+    fun getSortedOtherWorksByTitle() = viewModelScope.launch(Dispatchers.IO) {
+        _dailyWorks.postValue(Result.Loading)
+        try {
+            val workList = getWorksByTime.invoke().filter {
+                it.time == null
+            }
+            _dailyWorks.postValue(Result.Success(workList))
+        } catch (e: IOException) {
+            _dailyWorks.postValue(
+                Result.Error(
+                    e.message ?: "Something went wrong! please try again later."
+                )
+            )
+        }
+    }
+
+    fun getSortedOtherWorksByTime() = viewModelScope.launch(Dispatchers.IO) {
+        _dailyWorks.postValue(Result.Loading)
+        try {
+            val workList = getWorksByTime.invoke().filter {
+                it.time == null
+            }
+            _dailyWorks.postValue(Result.Success(workList))
+        } catch (e: IOException) {
+            _dailyWorks.postValue(
+                Result.Error(
+                    e.message ?: "Something went wrong! please try again later."
+                )
+            )
+        }
+    }
 }

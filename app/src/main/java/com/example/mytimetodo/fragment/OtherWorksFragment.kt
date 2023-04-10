@@ -102,15 +102,15 @@ class OtherWorksFragment : Fragment() {
 
     private fun setUpOnClickListeners() {
         binding.btnSortByColor.setOnClickListener {
-            viewModel.getSortedWorksDailyByColor()
+            viewModel.getSortedOtherWorksByColor()
         }
 
         binding.btnSortByTitle.setOnClickListener {
-            viewModel.getSortedDailyWorksByTitle()
+            viewModel.getSortedOtherWorksByTitle()
         }
 
         binding.btnSortByTime.setOnClickListener {
-            viewModel.getSortedDailyWorksByTime()
+            viewModel.getSortedOtherWorksByTime()
         }
     }
 

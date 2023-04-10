@@ -34,15 +34,21 @@ class WorkRepoImpl @Inject constructor(
     }
 
     override suspend fun getWorksByColor(): List<Work> {
-        TODO("Not yet implemented")
+        return getAllWorks().sortedBy {
+            it.color
+        }
     }
 
     override suspend fun getWorksByTitle(): List<Work> {
-        TODO("Not yet implemented")
+        return getAllWorks().sortedBy {
+            it.title
+        }
     }
 
     override suspend fun getWorksByTime(): List<Work> {
-        TODO("Not yet implemented")
+        return getAllWorks().sortedBy {
+            it.time
+        }
     }
 
 }

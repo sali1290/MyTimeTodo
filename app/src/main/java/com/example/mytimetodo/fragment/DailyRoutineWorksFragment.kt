@@ -57,6 +57,17 @@ class DailyRoutineWorksFragment : Fragment() {
     }
 
     private fun setUpOnClickListeners() {
+        binding.btnSortByColor.setOnClickListener {
+            viewModel.getSortedWorksDailyByColor()
+        }
+
+        binding.btnSortByTitle.setOnClickListener {
+            viewModel.getSortedDailyWorksByTitle()
+        }
+
+        binding.btnSortByTime.setOnClickListener {
+            viewModel.getSortedDailyWorksByTime()
+        }
     }
 
     private fun onBackPressed() {
@@ -141,8 +152,6 @@ class DailyRoutineWorksFragment : Fragment() {
             }
         }
     }
-
-
 
 
 }

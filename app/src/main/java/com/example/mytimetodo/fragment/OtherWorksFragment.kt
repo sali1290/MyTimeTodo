@@ -17,7 +17,7 @@ import com.example.mytimetodo.adapter.WorksAdapter
 import com.example.mytimetodo.databinding.FragmentOtherWorksBinding
 import com.example.mytimetodo.utility.Result
 import com.example.mytimetodo.utility.showTopSnackBar
-import com.example.mytimetodo.viewModel.HomeViewModel
+import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint

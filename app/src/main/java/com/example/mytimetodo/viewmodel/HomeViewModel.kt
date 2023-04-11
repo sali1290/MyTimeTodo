@@ -1,4 +1,4 @@
-package com.example.mytimetodo.viewModel
+package com.example.mytimetodo.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

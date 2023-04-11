@@ -1,5 +1,6 @@
 package com.example.mytimetodo.activity
 
+import android.app.AlarmManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var alarmManager: AlarmManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
     }
 

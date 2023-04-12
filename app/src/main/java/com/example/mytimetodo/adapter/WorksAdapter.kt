@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.Work
@@ -19,7 +20,7 @@ class WorksAdapter(private val data: List<Work>) :
         val workItem: CardView = view.findViewById(R.id.work_item)
         val title: TextView = view.findViewById(R.id.tv_title)
         val body: TextView = view.findViewById(R.id.tv_body)
-        val time: TextView = view.findViewById(R.id.tv_time)
+        val timeSwitch: SwitchCompat = view.findViewById(R.id.tv_time)
         val icEdit: ImageView = view.findViewById(R.id.img_edit)
         val icDelete: ImageView = view.findViewById(R.id.img_delete)
     }
@@ -39,9 +40,10 @@ class WorksAdapter(private val data: List<Work>) :
             title.text = data[position].title
             body.text = data[position].body
             if (data[position].time == null) {
-                time.text = ""
+                timeSwitch.text = ""
+                timeSwitch.visibility = View.GONE
             } else {
-                time.text =
+                timeSwitch.text =
                     SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
             }
 

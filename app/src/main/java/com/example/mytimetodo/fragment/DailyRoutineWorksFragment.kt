@@ -16,6 +16,7 @@ import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.WorksAdapter
 import com.example.mytimetodo.databinding.FragmentDailyRoutineWorksBinding
 import com.example.mytimetodo.utility.Result
+import com.example.mytimetodo.utility.alarmScheduler.AndroidAlarmScheduler
 import com.example.mytimetodo.utility.showTopSnackBar
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -122,6 +123,8 @@ class DailyRoutineWorksFragment : Fragment() {
         val fab: FloatingActionButton = requireActivity().findViewById(R.id.fab)
         val bottomAppBar: BottomAppBar = requireActivity().findViewById(R.id.bottom_app_bar)
 
+        val scheduler = AndroidAlarmScheduler(requireActivity())
+
         adapter.setOnEditClickListener(object : WorksAdapter.OnEditIconClickListener {
             override fun onClick(position: Int, work: Work) {
                 setFragmentResult("requestKey", bundleOf("workKey" to work))
@@ -140,13 +143,10 @@ class DailyRoutineWorksFragment : Fragment() {
         adapter.setOnSwitchCheckedChangeListener(object :
             WorksAdapter.OnSwitchCheckedChangeListener {
             override fun onChecked(position: Int, work: Work, isChecked: Boolean, date: Date) {
-//                // calculate time
-//                var time = (date.time - (date.time % 60000))
-//                if (System.currentTimeMillis() > time) {
-//                    // setting time as AM and PM
-//                    time += (1000 * 60 * 60 * 24)
-//                }
-
+                if (isChecked)
+                    scheduler.schedule(work)
+                else
+                    scheduler.cancel(work)
             }
         })
 

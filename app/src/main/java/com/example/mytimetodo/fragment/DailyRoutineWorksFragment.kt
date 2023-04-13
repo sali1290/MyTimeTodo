@@ -21,6 +21,8 @@ import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+
 
 @AndroidEntryPoint
 class DailyRoutineWorksFragment : Fragment() {
@@ -134,6 +136,20 @@ class DailyRoutineWorksFragment : Fragment() {
                 observeDeleteResult(adapter, position)
             }
         })
+
+        adapter.setOnSwitchCheckedChangeListener(object :
+            WorksAdapter.OnSwitchCheckedChangeListener {
+            override fun onChecked(position: Int, work: Work, isChecked: Boolean, date: Date) {
+//                // calculate time
+//                var time = (date.time - (date.time % 60000))
+//                if (System.currentTimeMillis() > time) {
+//                    // setting time as AM and PM
+//                    time += (1000 * 60 * 60 * 24)
+//                }
+
+            }
+        })
+
     }
 
     private fun observeDeleteResult(adapter: WorksAdapter, position: Int) {

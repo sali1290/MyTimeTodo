@@ -12,6 +12,7 @@ import com.example.domain.model.Work
 import com.example.mytimetodo.R
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.util.*
 
 class WorksAdapter(private val data: List<Work>) :
     RecyclerView.Adapter<WorksAdapter.DailyRoutineViewHolder>() {
@@ -45,6 +46,15 @@ class WorksAdapter(private val data: List<Work>) :
             } else {
                 timeSwitch.text =
                     SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
+
+                timeSwitch.setOnCheckedChangeListener { _, isChecked ->
+                    onSwitchCheckedChangeListener?.onChecked(
+                        position,
+                        data[position],
+                        isChecked,
+                        data[position].time!!
+                    )
+                }
             }
 
 
@@ -90,5 +100,15 @@ class WorksAdapter(private val data: List<Work>) :
         this.onDeleteIconClickListener = onDeleteIconClickListener
     }
 
+
+    private var onSwitchCheckedChangeListener: OnSwitchCheckedChangeListener? = null
+
+    interface OnSwitchCheckedChangeListener {
+        fun onChecked(position: Int, work: Work, isChecked: Boolean, date: Date)
+    }
+
+    fun setOnSwitchCheckedChangeListener(onSwitchCheckedChangeListener: OnSwitchCheckedChangeListener) {
+        this.onSwitchCheckedChangeListener = onSwitchCheckedChangeListener
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.example.mytimetodo.utility.notification
+package com.example.mytimetodo.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

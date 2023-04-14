@@ -1,4 +1,4 @@
-package com.example.mytimetodo.utility.alarmScheduler
+package com.example.mytimetodo.alarmScheduler
 
 import com.example.domain.model.Work
 

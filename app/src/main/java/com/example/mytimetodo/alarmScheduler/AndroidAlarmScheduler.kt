@@ -1,4 +1,4 @@
-package com.example.mytimetodo.utility.alarmScheduler
+package com.example.mytimetodo.alarmScheduler
 
 import android.annotation.SuppressLint
 import android.app.AlarmManager
@@ -18,7 +18,7 @@ class AndroidAlarmScheduler(
     override fun schedule(work: Work) {
 
         val intent = Intent(context, AlarmReceiver::class.java).apply {
-            putExtra("WORK_TITLE", work.title)
+            putExtra("WORK", work)
         }
 
         // calculate time

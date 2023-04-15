@@ -22,7 +22,8 @@ import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 @AndroidEntryPoint
 class AddWorkFragment : Fragment() {
@@ -119,7 +120,8 @@ class AddWorkFragment : Fragment() {
                                     title = title,
                                     body = body,
                                     time = date,
-                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString(),
+                                    isAlarmSet = true
                                 )
                             )
                             //navigate to daily routine fragment and pop this fragment
@@ -137,7 +139,8 @@ class AddWorkFragment : Fragment() {
                             title = title,
                             body = body,
                             time = null,
-                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString(),
+                            isAlarmSet = false
                         )
                     )
                     //navigate to daily routine fragment and pop this fragment

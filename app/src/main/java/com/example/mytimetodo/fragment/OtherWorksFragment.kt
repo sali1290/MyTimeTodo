@@ -69,7 +69,7 @@ class OtherWorksFragment : Fragment() {
                             tvEmpty.visibility = View.VISIBLE
                         }
                     } else {
-                        val adapter = WorksAdapter(it.data)
+                        val adapter = WorksAdapter(it.data, requireActivity())
                         binding.recyclerOtherWorks.adapter = adapter
                         setUpAdapterRecyclerOnClickListener(adapter)
                     }

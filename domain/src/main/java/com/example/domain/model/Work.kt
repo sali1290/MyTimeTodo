@@ -1,7 +1,7 @@
 package com.example.domain.model
 
 import java.io.Serializable
-import java.util.*
+import java.util.Date
 
 data class Work(
 
@@ -14,5 +14,7 @@ data class Work(
     val body: String,
 
     val color: String,
+
+    val isAlarmSet: Boolean
 
 ) : Serializable

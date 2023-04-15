@@ -13,6 +13,7 @@ class WorkMapper @Inject constructor() {
             body = workModel.body,
             time = workModel.time,
             color = workModel.color,
+            isAlarmSet = workModel.isAlarmSet
         )
     }
 
@@ -23,6 +24,7 @@ class WorkMapper @Inject constructor() {
             body = work.body,
             time = work.time,
             color = work.color,
+            isAlarmSet = work.isAlarmSet
         )
     }
 

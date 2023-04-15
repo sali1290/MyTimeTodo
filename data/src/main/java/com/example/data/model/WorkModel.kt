@@ -3,7 +3,7 @@ package com.example.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
+import java.util.Date
 
 @Entity(tableName = "work_table")
 data class WorkModel(
@@ -24,4 +24,7 @@ data class WorkModel(
     @ColumnInfo(name = "work_color")
     val color: String,
 
-)
+    @ColumnInfo(name = "work_is_alarm_set")
+    val isAlarmSet: Boolean,
+
+    )

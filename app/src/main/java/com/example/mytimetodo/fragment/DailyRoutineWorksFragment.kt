@@ -14,15 +14,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
 import com.example.mytimetodo.adapter.WorksAdapter
+import com.example.mytimetodo.alarmScheduler.AndroidAlarmScheduler
 import com.example.mytimetodo.databinding.FragmentDailyRoutineWorksBinding
 import com.example.mytimetodo.utility.Result
-import com.example.mytimetodo.alarmScheduler.AndroidAlarmScheduler
 import com.example.mytimetodo.utility.showTopSnackBar
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Date
 
 
 @AndroidEntryPoint
@@ -93,7 +93,7 @@ class DailyRoutineWorksFragment : Fragment() {
                             tvEmpty.visibility = View.VISIBLE
                         }
                     } else {
-                        adapter = WorksAdapter(it.data)
+                        adapter = WorksAdapter(it.data, requireActivity())
                         binding.recyclerDailyRoutine.adapter = adapter
                         setUpRecyclerAdapterOnClickListener(adapter)
                     }
@@ -143,10 +143,11 @@ class DailyRoutineWorksFragment : Fragment() {
         adapter.setOnSwitchCheckedChangeListener(object :
             WorksAdapter.OnSwitchCheckedChangeListener {
             override fun onChecked(position: Int, work: Work, isChecked: Boolean, date: Date) {
-                if (isChecked)
+                if (isChecked) {
                     scheduler.schedule(work)
-                else
+                } else {
                     scheduler.cancel(work)
+                }
             }
         })
 

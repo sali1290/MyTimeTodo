@@ -1,5 +1,6 @@
 package com.example.mytimetodo.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,18 +11,21 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
+import com.example.mytimetodo.alarmScheduler.AndroidAlarmScheduler
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
-class WorksAdapter(private val data: List<Work>) :
+class WorksAdapter(private val data: List<Work>, context: Context) :
     RecyclerView.Adapter<WorksAdapter.DailyRoutineViewHolder>() {
+
+    private val scheduler = AndroidAlarmScheduler(context)
 
     class DailyRoutineViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val workItem: CardView = view.findViewById(R.id.work_item)
         val title: TextView = view.findViewById(R.id.tv_title)
         val body: TextView = view.findViewById(R.id.tv_body)
-        val timeSwitch: SwitchCompat = view.findViewById(R.id.tv_time)
+        val alarmSwitch: SwitchCompat = view.findViewById(R.id.switch_alarm)
         val icEdit: ImageView = view.findViewById(R.id.img_edit)
         val icDelete: ImageView = view.findViewById(R.id.img_delete)
     }
@@ -40,14 +44,18 @@ class WorksAdapter(private val data: List<Work>) :
             )
             title.text = data[position].title
             body.text = data[position].body
-            if (data[position].time == null) {
-                timeSwitch.text = ""
-                timeSwitch.visibility = View.GONE
+            if (!data[position].isAlarmSet) {
+                alarmSwitch.text = ""
+                alarmSwitch.visibility = View.GONE
+                alarmSwitch.isChecked = false
+                scheduler.cancel(data[position])
             } else {
-                timeSwitch.text =
+                scheduler.schedule(data[position])
+                alarmSwitch.isChecked = true
+                alarmSwitch.text =
                     SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
 
-                timeSwitch.setOnCheckedChangeListener { _, isChecked ->
+                alarmSwitch.setOnCheckedChangeListener { _, isChecked ->
                     onSwitchCheckedChangeListener?.onChecked(
                         position,
                         data[position],

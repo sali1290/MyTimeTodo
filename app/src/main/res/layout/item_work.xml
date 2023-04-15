@@ -36,7 +36,7 @@
                 android:textSize="40sp"
                 android:textStyle="bold|italic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_time" />
+                app:layout_constraintTop_toBottomOf="@+id/switch_alarm" />
 
             <TextView
                 android:id="@+id/tv_body"
@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
             <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/tv_time"
+                android:id="@+id/switch_alarm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"

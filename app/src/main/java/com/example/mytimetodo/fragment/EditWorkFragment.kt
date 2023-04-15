@@ -24,7 +24,8 @@ import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 @AndroidEntryPoint
 class EditWorkFragment : Fragment() {
@@ -153,7 +154,8 @@ class EditWorkFragment : Fragment() {
                                     title = title,
                                     body = body,
                                     time = date,
-                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                                    color = (binding.etWorkBody.background as (ColorDrawable)).color.toString(),
+                                    isAlarmSet = true
                                 )
                             )
                         },
@@ -169,7 +171,8 @@ class EditWorkFragment : Fragment() {
                             title = title,
                             body = body,
                             time = null,
-                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString()
+                            color = (binding.etWorkBody.background as (ColorDrawable)).color.toString(),
+                            isAlarmSet = true
                         )
                     )
                 }

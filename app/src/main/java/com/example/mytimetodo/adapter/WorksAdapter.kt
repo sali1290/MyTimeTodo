@@ -44,14 +44,11 @@ class WorksAdapter(private val data: List<Work>, context: Context) :
             )
             title.text = data[position].title
             body.text = data[position].body
-            if (!data[position].isAlarmSet) {
+
+            if (data[position].time == null) {
                 alarmSwitch.text = ""
                 alarmSwitch.visibility = View.GONE
-                alarmSwitch.isChecked = false
-                scheduler.cancel(data[position])
             } else {
-                scheduler.schedule(data[position])
-                alarmSwitch.isChecked = true
                 alarmSwitch.text =
                     SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
 
@@ -63,6 +60,15 @@ class WorksAdapter(private val data: List<Work>, context: Context) :
                         data[position].time!!
                     )
                 }
+            }
+
+            if (data[position].isAlarmSet) {
+                alarmSwitch.isChecked = true
+                scheduler.schedule(data[position])
+
+            } else {
+                alarmSwitch.isChecked = false
+                scheduler.cancel(data[position])
             }
 
 

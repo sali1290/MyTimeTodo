@@ -145,8 +145,30 @@ class DailyRoutineWorksFragment : Fragment() {
             override fun onChecked(position: Int, work: Work, isChecked: Boolean, date: Date) {
                 if (isChecked) {
                     scheduler.schedule(work)
+                    viewModel.updateWork(
+                        Work(
+                            id = work.id,
+                            title = work.title,
+                            body = work.body,
+                            time = date,
+                            color = work.color,
+                            isAlarmSet = true
+                        )
+                    )
+                    observeUpdateResult(adapter, position)
                 } else {
                     scheduler.cancel(work)
+                    viewModel.updateWork(
+                        Work(
+                            id = work.id,
+                            title = work.title,
+                            body = work.body,
+                            time = date,
+                            color = work.color,
+                            isAlarmSet = false
+                        )
+                    )
+                    observeUpdateResult(adapter, position)
                 }
             }
         })
@@ -160,6 +182,20 @@ class DailyRoutineWorksFragment : Fragment() {
                 viewModel.getDailyRoutineWorks()
                 Toast.makeText(requireActivity(), "Work deleted successfully", Toast.LENGTH_SHORT)
                     .show()
+            } else {
+                Toast.makeText(
+                    requireActivity(),
+                    "Something went wrong! please try again",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    private fun observeUpdateResult(adapter: WorksAdapter, position: Int) {
+        viewModel.deleteResult.observe(viewLifecycleOwner) {
+            if (it) {
+                adapter.notifyItemChanged(position)
             } else {
                 Toast.makeText(
                     requireActivity(),

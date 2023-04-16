@@ -12,10 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.domain.model.Work
 import com.example.mytimetodo.R
-import com.example.mytimetodo.adapter.WorkColorList
 import com.example.mytimetodo.adapter.WorkColorsAdapter
 import com.example.mytimetodo.adapter.changeBackgroundColor
 import com.example.mytimetodo.databinding.FragmentAddWorkBinding
+import com.example.mytimetodo.utility.WorkColorList
 import com.example.mytimetodo.utility.customOnBackPressed
 import com.example.mytimetodo.utility.showTopSnackBar
 import com.example.mytimetodo.viewmodel.HomeViewModel
@@ -71,13 +71,7 @@ class AddWorkFragment : Fragment() {
 
     private fun setUpOnClickListeners() {
         binding.btnCancel.setOnClickListener {
-            requireActivity().apply {
-                findViewById<FloatingActionButton>(R.id.fab).visibility =
-                    View.VISIBLE
-                findViewById<BottomAppBar>(R.id.bottom_app_bar).visibility =
-                    View.VISIBLE
-                onBackPressedDispatcher.onBackPressed()
-            }
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
         binding.btnSave.setOnClickListener {
@@ -144,7 +138,7 @@ class AddWorkFragment : Fragment() {
                             isAlarmSet = false
                         )
                     )
-                    //navigate to daily routine fragment and pop this fragment
+                    //navigate to other routine fragment and pop this fragment
                     successfulWorkSave()
                 }
             }
@@ -172,7 +166,6 @@ class AddWorkFragment : Fragment() {
             findNavController().navigate(R.id.otherWorksFragment)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

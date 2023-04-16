@@ -23,17 +23,21 @@ class WorkColorsAdapter(private val context: Context, private val colorList: Lis
     }
 
     override fun onBindViewHolder(viewHolder: ColorViewHolder, position: Int) {
-        viewHolder.colorItem.setCardBackgroundColor(
-            ContextCompat.getColor(
-                context,
-                colorList[position]
+
+        viewHolder.apply {
+            colorItem.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    colorList[position]
+                )
             )
-        )
-        viewHolder.colorItem.setOnClickListener {
-            if (onClickListener != null) {
-                onClickListener!!.onClick(position, colorList[position])
+            colorItem.setOnClickListener {
+                if (onClickListener != null) {
+                    onClickListener!!.onClick(position, colorList[position])
+                }
             }
         }
+
     }
 
     override fun getItemCount() = colorList.size

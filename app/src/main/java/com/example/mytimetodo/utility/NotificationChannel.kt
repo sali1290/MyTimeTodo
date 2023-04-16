@@ -1,9 +1,10 @@
-package com.example.mytimetodo.notification
+package com.example.mytimetodo.utility
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import com.example.mytimetodo.notification.WorkNotificationService
 
 fun createNotificationChannel(context: Context) {
     // Create the NotificationChannel, but only on API 26+ because

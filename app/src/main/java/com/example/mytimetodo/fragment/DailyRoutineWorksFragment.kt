@@ -180,8 +180,6 @@ class DailyRoutineWorksFragment : Fragment() {
             if (it) {
                 adapter.notifyItemRemoved(position)
                 viewModel.getDailyRoutineWorks()
-                Toast.makeText(requireActivity(), "Work deleted successfully", Toast.LENGTH_SHORT)
-                    .show()
             } else {
                 Toast.makeText(
                     requireActivity(),

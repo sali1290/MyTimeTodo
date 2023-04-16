@@ -1,4 +1,4 @@
-package com.example.mytimetodo.adapter
+package com.example.mytimetodo.utility
 
 import com.example.mytimetodo.R
 

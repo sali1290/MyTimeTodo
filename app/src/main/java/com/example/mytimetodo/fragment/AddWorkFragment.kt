@@ -20,6 +20,7 @@ import com.example.mytimetodo.utility.customOnBackPressed
 import com.example.mytimetodo.utility.showTopSnackBar
 import com.example.mytimetodo.viewmodel.HomeViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
@@ -159,9 +160,15 @@ class AddWorkFragment : Fragment() {
             findViewById<BottomAppBar>(R.id.bottom_app_bar).visibility =
                 View.VISIBLE
         }
+
+        val bottomNavigationView =
+            requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
+
         if (binding.chbDaily.isChecked) {
+            bottomNavigationView.menu.getItem(1).isChecked = true
             findNavController().navigate(R.id.dailyRoutineFragment)
         } else {
+            bottomNavigationView.menu.getItem(0).isChecked = true
             findNavController().navigate(R.id.otherWorksFragment)
         }
     }

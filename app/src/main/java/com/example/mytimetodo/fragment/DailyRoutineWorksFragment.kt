@@ -137,39 +137,14 @@ class DailyRoutineWorksFragment : Fragment() {
             override fun onClick(position: Int, work: Work) {
                 viewModel.deleteWork(work)
                 observeDeleteResult(adapter, position)
+                scheduler.cancel(work)
             }
         })
 
         adapter.setOnSwitchCheckedChangeListener(object :
             WorksAdapter.OnSwitchCheckedChangeListener {
             override fun onChecked(position: Int, work: Work, isChecked: Boolean, date: Date) {
-                if (isChecked) {
-                    scheduler.schedule(work)
-                    viewModel.updateWork(
-                        Work(
-                            id = work.id,
-                            title = work.title,
-                            body = work.body,
-                            time = date,
-                            color = work.color,
-                            isAlarmSet = true
-                        )
-                    )
-                    observeUpdateResult(adapter, position)
-                } else {
-                    scheduler.cancel(work)
-                    viewModel.updateWork(
-                        Work(
-                            id = work.id,
-                            title = work.title,
-                            body = work.body,
-                            time = date,
-                            color = work.color,
-                            isAlarmSet = false
-                        )
-                    )
-                    observeUpdateResult(adapter, position)
-                }
+                updateExistingWork(position, work, isChecked, date)
             }
         })
 
@@ -204,5 +179,35 @@ class DailyRoutineWorksFragment : Fragment() {
         }
     }
 
+    private fun updateExistingWork(position: Int, work: Work, isChecked: Boolean, date: Date) {
 
+        val scheduler = AndroidAlarmScheduler(requireActivity())
+        if (isChecked) {
+            scheduler.schedule(work)
+            viewModel.updateWork(
+                Work(
+                    id = work.id,
+                    title = work.title,
+                    body = work.body,
+                    time = date,
+                    color = work.color,
+                    isAlarmSet = true
+                )
+            )
+            observeUpdateResult(adapter, position)
+        } else {
+            scheduler.cancel(work)
+            viewModel.updateWork(
+                Work(
+                    id = work.id,
+                    title = work.title,
+                    body = work.body,
+                    time = date,
+                    color = work.color,
+                    isAlarmSet = false
+                )
+            )
+            observeUpdateResult(adapter, position)
+        }
+    }
 }

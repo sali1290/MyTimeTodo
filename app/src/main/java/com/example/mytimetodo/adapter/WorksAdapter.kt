@@ -51,15 +51,6 @@ class WorksAdapter(private val data: List<Work>, context: Context) :
             } else {
                 alarmSwitch.text =
                     SimpleDateFormat.getTimeInstance(DateFormat.SHORT).format(data[position].time!!)
-
-                alarmSwitch.setOnCheckedChangeListener { _, isChecked ->
-                    onSwitchCheckedChangeListener?.onChecked(
-                        position,
-                        data[position],
-                        isChecked,
-                        data[position].time!!
-                    )
-                }
             }
 
             if (data[position].isAlarmSet) {
@@ -82,6 +73,15 @@ class WorksAdapter(private val data: List<Work>, context: Context) :
                 if (onDeleteIconClickListener != null) {
                     onDeleteIconClickListener!!.onClick(position, data[position])
                 }
+            }
+
+            alarmSwitch.setOnCheckedChangeListener { _, isChecked ->
+                onSwitchCheckedChangeListener?.onChecked(
+                    position,
+                    data[position],
+                    isChecked,
+                    data[position].time!!
+                )
             }
 
         }

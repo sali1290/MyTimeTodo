@@ -12,16 +12,6 @@
         android:elevation="30dp"
         app:cardCornerRadius="15dp">
 
-        <ImageView
-            android:id="@+id/img_check_done"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="@drawable/icon_background"
-            android:contentDescription="@string/check_icon"
-            android:visibility="gone"
-            app:srcCompat="@drawable/ic_check"
-            app:tint="@color/light_primary_color" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -56,17 +46,6 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/img_isDone"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
-                android:contentDescription="@string/check_icon"
-                app:layout_constraintEnd_toStartOf="@+id/img_edit"
-                app:layout_constraintTop_toBottomOf="@+id/tv_body"
-                app:srcCompat="@drawable/ic_check" />
 
             <ImageView
                 android:id="@+id/img_edit"
